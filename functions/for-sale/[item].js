@@ -1506,7 +1506,7 @@ export async function onRequest({ context, env, request  }) {
 
 
 
-    return new Response(JSON.stringify(searcheResults), {
+    return new Response(html, {
       headers: {
         "content-type": "text/html;charset=UTF-8",
       },
