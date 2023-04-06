@@ -10,8 +10,8 @@ export async function onRequest({ context, env, request  }) {
     console.log(keyword)
        
     //learn how to patch pages to kv
-    const allKeys = await env.marketplace.get("available:T01C79S2HKP:U01JP332EP7:1616534585127")
-    // const allKeys = (await env.marketplace.list({"prefix": "available:"})).keys
+    // const allKeys = await env.marketplace.get("available:T01C79S2HKP:U01JP332EP7:1616534585127")
+    const allKeys = (await env.marketplace.list({"prefix": "available:"})).keys
     console.log(allKeys)
     console.log(allKeys)
     return new Response(JSON.stringify(allKeys))
