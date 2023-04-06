@@ -39,7 +39,9 @@ export async function onRequest({ context, env, request  }) {
       console.log(searchResults)
       if (searchResults.length == 0) {
         console.log("nothing found")
+        return new Response("Nothing found")
       }
+      return searchResults
     }
 
     console.log("---iguess ill see this before the rest")
