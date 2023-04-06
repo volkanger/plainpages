@@ -29,11 +29,11 @@ export async function onRequest({ context, env, request  }) {
           const itemPlatform = allKeys[i].name.split(":")[1]
           const price = values.split("for $")[1]
           const timestamp = allKeys[i].name.split(":")[4]
-          const date = new Date(timestamp); // convert seconds to milliseconds
+          const date = new Date(timestamp);
           const year = date.getFullYear();
-          const month = ("0" + (date.getMonth() + 1)).slice(-2); // add leading zero to month
-          const day = ("0" + date.getDate()).slice(-2); // add leading zero to day
-          const formattedDate = `${year}-${month}-${day}`; // format date as yyyy-mm-dd
+          const month = ("0" + (date.getMonth() + 1)).slice(-2);
+          const day = ("0" + date.getDate()).slice(-2);
+          const formattedDate = `${year}-${month}-${day}`;
           //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
           //split 0 is available
           //split1 is discord
@@ -44,7 +44,7 @@ export async function onRequest({ context, env, request  }) {
             "owner" : item_owner_user_id,
             "price" : price,
             "platform" : itemPlatform,
-            "time" : timestamp
+            "time" : formattedDate
           }
           searchResults.push(object)
           // searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
@@ -65,41 +65,48 @@ export async function onRequest({ context, env, request  }) {
     console.log(JSON.stringify(searcheResults))
 
     let cards = [`<div class="item">
-        <div class="wrapper">
-            <div class="image">
-                <h3>
-                    <a href="#" class="tag category">Adventure</a>
-                    <a href="single-listing-1.html" class="title">Poker of The WildCards</a>
-                    <span class="tag">Ad</span>
-                </h3>
-                <a href="single-listing-1.html" class="image-wrapper background-image">
-                    <img src="assets/img/image-03.jpg" alt="">
-                </a>
-            </div>
-            <!--end image-->
-            <h4 class="location">
-                <a href="#">Seattle, WA</a>
-            </h4>
-            <div class="price">$1,560</div>
-            <div class="meta">
-                <figure>
-                    <i class="fa fa-calendar-o"></i>21.04.2017
-                </figure>
-                <figure>
-                    <a href="#">
-                        <i class="fa fa-user"></i>Peak Agency
-                    </a>
-                </figure>
-            </div>
-            <!--end meta-->
-            <div class="description">
-                <p>Nam eget ullamcorper massa. Morbi fringilla lectus nec lorem tristique gravida</p>
-            </div>
-            <!--end description-->
-            <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+    <div class="ribbon-diagonal">
+        <div class="ribbon-diagonal__inner">
+            <span>Sold</span>
         </div>
-      </div>
-      <!--end item-->`]
+    </div>
+    <div class="ribbon-featured">Featured</div>
+    <!--end ribbon-->
+    <div class="wrapper">
+        <div class="image">
+            <h3>
+                <a href="#" class="tag category">Home & Decor</a>
+                <a href="single-listing-1.html" class="title">Furniture for sale</a>
+                <span class="tag">Offer</span>
+            </h3>
+            <a href="single-listing-1.html" class="image-wrapper background-image">
+                <img src="assets/img/image-01.jpg" alt="">
+            </a>
+        </div>
+        <!--end image-->
+        <h4 class="location">
+            <a href="#">Manhattan, NY</a>
+        </h4>
+        <div class="price">$80</div>
+        <div class="meta">
+            <figure>
+                <i class="fa fa-calendar-o"></i>02.05.2017
+            </figure>
+            <figure>
+                <a href="#">
+                    <i class="fa fa-user"></i>Jane Doe
+                </a>
+            </figure>
+        </div>
+        <!--end meta-->
+        <div class="description">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis lobortis</p>
+        </div>
+        <!--end description-->
+        <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+    </div>
+</div>
+<!--end item-->`]
 
     searcheResults.forEach((item) => {
         console.log(item.title)
@@ -365,49 +372,7 @@ export async function onRequest({ context, env, request  }) {
                     <!--============ Items ==========================================================================-->
                     <div class="items list grid-xl-4-items grid-lg-3-items grid-md-2-items">
                     ${cards}
-                        <div class="item">
-                            <div class="ribbon-diagonal">
-                                <div class="ribbon-diagonal__inner">
-                                    <span>Sold</span>
-                                </div>
-                            </div>
-                            <div class="ribbon-featured">Featured</div>
-                            <!--end ribbon-->
-                            <div class="wrapper">
-                                <div class="image">
-                                    <h3>
-                                        <a href="#" class="tag category">Home & Decor</a>
-                                        <a href="single-listing-1.html" class="title">Furniture for sale</a>
-                                        <span class="tag">Offer</span>
-                                    </h3>
-                                    <a href="single-listing-1.html" class="image-wrapper background-image">
-                                        <img src="assets/img/image-01.jpg" alt="">
-                                    </a>
-                                </div>
-                                <!--end image-->
-                                <h4 class="location">
-                                    <a href="#">Manhattan, NY</a>
-                                </h4>
-                                <div class="price">$80</div>
-                                <div class="meta">
-                                    <figure>
-                                        <i class="fa fa-calendar-o"></i>02.05.2017
-                                    </figure>
-                                    <figure>
-                                        <a href="#">
-                                            <i class="fa fa-user"></i>Jane Doe
-                                        </a>
-                                    </figure>
-                                </div>
-                                <!--end meta-->
-                                <div class="description">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis lobortis</p>
-                                </div>
-                                <!--end description-->
-                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
-                            </div>
-                        </div>
-                        <!--end item-->
+                        
 
                         <div class="item">
                             <div class="wrapper">
