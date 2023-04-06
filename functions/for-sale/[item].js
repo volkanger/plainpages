@@ -18,9 +18,9 @@ export async function onRequest({ context, env, request  }) {
       var i = 0
       var searchResults = ""
       for (i = 0; i < allKeys.length; i++) {
-        console.log(i)
+        //console.log(i)
         const values = await env.marketplace.get(allKeys[i].name)
-        console.log("values: " + values)
+        //console.log("values: " + values)
         if (values && values.toLowerCase().includes(keyword.toLowerCase())) {
           foundKeys = foundKeys + 1
           console.log("matching values: " + values)
