@@ -29,7 +29,7 @@ export async function onRequest({ context, env, request  }) {
           const itemPlatform = allKeys[i].name.split(":")[1]
           const price = values.split("for $")[1]
           const timestamp = allKeys[i].name.split(":")[4]
-          const date = new Date(timestamp * 1000); // convert seconds to milliseconds
+          const date = new Date(timestamp); // convert seconds to milliseconds
           const year = date.getFullYear();
           const month = ("0" + (date.getMonth() + 1)).slice(-2); // add leading zero to month
           const day = ("0" + date.getDate()).slice(-2); // add leading zero to day
