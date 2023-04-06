@@ -1,74 +1,888 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf8">
-		<title>Cloudflare Pages | Form Demo</title>
-		<meta name="theme-color" content="#d86300">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<link rel="icon" type="image/png" href="https://www.cloudflare.com/favicon-128.png">
-		<link rel="stylesheet" href="/index.css">
-	</head>
-	<body>
 
-		<main>
-			<h1>Demo: Form Submission</h1>
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KSVWBWW');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Volkan Ger"> 
+    <meta name="description"  content="Marketplace is an easy yet powerful app for Slack that lets Slack users to buy and sell items within the same company.">
 
-			<blockquote>
-				<p>This is a demonstration of Cloudflare Pages with Functions.</p>
-				<p>Pages deployed a <code>/public</code> directory, containing a HTML document (this webpage) and a <code>/functions</code> directory, which contains the Cloudflare Workers code for the API endpoint this <code>&lt;form&gt;</code> references.</p>
-				<p><b>NOTE:</b> On form submission, the API endpoint responds with a JSON representation of the data. There is no JavaScript running in this example.</p>
-			</blockquote>
+    
 
-			<form method="POST" action="/api/submit">
-				<div class="input">
-					<label for="name">Full Name</label>
-					<input id="name" name="name" type="text" />
-				</div>
+    <title>Marketplace for Slack ｜ Sell and Buy Among Coworkers - Home</title>
+    <link rel="shortcut icon" type="image/jpg" href="assets/icons/marketplacefavicon.ico" />
 
-				<div class="input">
-					<label for="email">Email Address</label>
-					<input id="email" name="email" type="email" />
-				</div>
 
-				<div class="input">
-					<label for="referers">How did you hear about us?</label>
-					<select id="referers" name="referers">
-						<option hidden disabled selected value></option>
-						<option value="Facebook">Facebook</option>
-						<option value="Twitter">Twitter</option>
-						<option value="Google">Google</option>
-						<option value="Bing">Bing</option>
-						<option value="Friends">Friends</option>
-					</select>
-				</div>
+</head>
 
-				<div class="checklist">
-					<label>What are your favorite movies?</label>
-					<ul>
-						<li>
-							<input id="m1" type="checkbox" name="movies" value="Space Jam" />
-							<label for="m1">Space Jam</label>
-						</li>
-						<li>
-							<input id="m2" type="checkbox" name="movies" value="Little Rascals" />
-							<label for="m2">Little Rascals</label>
-						</li>
-						<li>
-							<input id="m3" type="checkbox" name="movies" value="Frozen" />
-							<label for="m3">Frozen</label>
-						</li>
-						<li>
-							<input id="m4" type="checkbox" name="movies" value="Home Alone" />
-							<label for="m4">Home Alone</label>
-						</li>
-					</ul>
-				</div>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KSVWBWW"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="page home-page">
+        <!--*********************************************************************************************************-->
+        <!--************ HERO ***************************************************************************************-->
+        <!--*********************************************************************************************************-->
+        <header class="hero">
+            <div class="hero-wrapper">
+                <!--============ Secondary Navigation ===============================================================-->
+                <div class="secondary-navigation">
+                    <div class="container">
+                        <ul class="left">
+                            <li>
+                                <span>
+                                    <i class="fa fa-phone"></i> +1 260 7865526
+                                </span>
+                            </li>
+                        </ul>
+                        <!--end left-->
+                        <ul class="right">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-heart"></i>My Ads
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-sign-in"></i>Sign In
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-pencil-square-o"></i>Register
+                                </a>
+                            </li>
+                        </ul>
+                        <!--end right-->
+                    </div>
+                    <!--end container-->
+                </div>
+                <!--============ End Secondary Navigation ===========================================================-->
+                <!--============ Main Navigation ====================================================================-->
+                <div class="main-navigation">
+                    <div class="container">
+                        <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+                            <a class="navbar-brand" href="index.html">
+                                <img src="assets/img/marketplacelogo.png" alt="">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar"
+                                aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbar">
+                                <!--Main navigation list-->
+                                <ul class="navbar-nav">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="#">Home</a>
+                                    </li>
+                                    <li class="nav-item has-child">
+                                        <a class="nav-link" href="support">Support</a>
+                                        <!--1st level -->
+                                        <ul class="child">
+                                            <li class="nav-item">
+                                                <a href="privacy-policy" class="nav-link">Privacy Policy</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="terms-and-conditions" class="nav-link">Terms &
+                                                    Conditions</a>
+                                            </li>
 
-				<button type="submit">Submit</button>
-			</form>
-		</main>
+                                        </ul>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="contact">Contact</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="https://slack.com/oauth/v2/authorize?client_id=39065726036.1542208008273&scope=commands,incoming-webhook&user_scope="
+                                            class="btn btn-primary text-caps btn-rounded btn-framed">Add to Slack</a>
+                                    </li>
+                                </ul>
+                                <!--Main navigation list-->
+                            </div>
+                            <!--end navbar-collapse-->
+                        </nav>
+                        <!--end navbar-->
+                    </div>
+                    <!--end container-->
+                </div>
+                <!--============ End Main Navigation ================================================================-->
+                <!--============ Page Title =========================================================================-->
+                <div class="page-title">
+                    <div class="container">
+                        <h1 class="opacity-60 center">
+                            <a href="#">Buy</a>, <a href="#">Sell</a> or <a href="#">Find</a>
+                            What You need
+                        </h1>
+                    </div>
+                    <!--end container-->
+                </div>
+                <!--============ End Page Title =====================================================================-->
+                <!--============ Hero Form ==========================================================================-->
+                <form class="hero-form form">
+                    <div class="container">
+                        <!--Main Form-->
+                        <div class="main-search-form">
+                            <div class="form-row">
+                                <div class="col-md-9 col-sm-9">
+                                    <div class="form-group">
+                                        <label for="what" class="col-form-label">What Are You Looking For?</label>
+                                        <input name="keyword" type="text" class="form-control" id="what" placeholder="Enter Anything">
+                                    </div>
+                                    <!--end form-group-->
+                                </div>
+                                <!--end col-md-3-->
+                                <div class="col-md-3 col-sm-3">
+                                    <button type="submit" class="btn btn-primary width-100">Search</button>
+                                </div>
+                                <!--end col-md-3-->
+                            </div>
+                            <!--end form-row-->
+                        </div>
+                        <!--end main-search-form-->
 
-	</body>
+                    </div>
+                    <!--end container-->
+                    <div class="container">
+                        <script type="application/ld+json">
+                            {
+                              "@context": "https://schema.org/",
+                              "@type": "Service",
+                              "name": "Marketplace for Slack",
+                              "areaServed": "Slack",
+                              "description": "Marketplace lets Slack users to list items for sale, and browse through available items."
+                            }
+                         </script>
+                        <p>
+                        <p class="center hthree">
+                            Marketplace is an easy yet powerful <span class="underline" data-toggle="tooltip"
+                                data-placement="top" title="An app for Slack that extends the capabilities of Slack">app for Slack</span>
+                            that lets Slack users to buy and sell items within the same company. <br>You can search for
+                            goods listed for sale by your coworkers, or let your teammates know what you have up for sale.
+                        </p>
+                        </p>
+                    </div>
+                </form>
+                <!--============ End Hero Form ======================================================================-->
+                <div class="background">
+                    <div class="background-image original-size"
+                        style="background-image: url('assets/img/hero-background-icons.jpg');">
+                        <img src="assets/img/hero-background-icons.jpg" alt="">
+                    </div>
+                    <!--end background-image-->
+                </div>
+                <!--end background-->
+            </div>
+            <!--end hero-wrapper-->
+        </header>
+        <!--end hero-->
+
+        <!--*********************************************************************************************************-->
+        <!--************ CONTENT ************************************************************************************-->
+        <!--*********************************************************************************************************-->
+        <section class="content">
+            <!--============ Categories =============================================================================-->
+            <section class="block">
+                <div class="container">
+                    <h2>Things you can sell or buy</h2>
+                    <ul class="categories-list clearfix">
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-furniture-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Furniture</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Beds</a>
+                                <a href="#">Sofas</a>
+                                <a href="#">Garden</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-pets-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Pet Supplies</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Dog Toys</a>
+                                <a href="#">Cat Toys</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-real-estate-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Real Estate</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Houses</a>
+                                <a href="#">Apartments</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-sport-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Sport</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Ski</a>
+                                <a href="#">Bike</a>
+                                <a href="#">Hockey</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-cars-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Car</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">New</a>
+                                <a href="#">Used</a>
+                                <a href="#">Rent</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-mobile-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Mobile</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Apple</a>
+                                <a href="#">Samsung</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-cameras-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Cameras</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Photo</a>
+                                <a href="#">Video</a>
+                                <a href="#">Lenses</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-jobs-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Jobs & Gigs</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Find Gigs</a>
+                                <a href="#">Offer Job</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-electro-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Electro</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">TV</a>
+                                <a href="#">Radio</a>
+                                <a href="#">PC</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-clothing-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Clothing</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Shirts</a>
+                                <a href="#">Trousers</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-books-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Books</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Fantasy</a>
+                                <a href="#">History</a>
+                                <a href="#">Sci-Fi</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                        <li>
+                            <i class="category-icon">
+                                <img src="assets/icons/category-music-b.png" alt="">
+                            </i>
+                            <h3><a href="#">Music</a></h3>
+                            <div class="sub-categories">
+                                <a href="#">Rock</a>
+                                <a href="#">Techno</a>
+                                <a href="#">Folk</a>
+                            </div>
+                        </li>
+                        <!--end category item-->
+                    </ul>
+                    <!--end categories-list-->
+                </div>
+                <!--end container-->
+            </section>
+            <!--end block-->
+            <!--============ End Categories =========================================================================-->
+
+            <!--============ Features Steps =========================================================================-->
+            <section class="block">
+                <div class="container">
+                    <div class="block">
+                        <h2>Selling With Us Is Easy</h2>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="feature-box">
+                                    <figure>
+                                        <img src="assets/icons/feature-user.png" alt="">
+                                        <span>1</span>
+                                    </figure>
+                                    <h3>Add Marketplace to Slack</h3>
+                                    <p>Ask your admin to <a
+                                            target="_blank" style="text-decoration: underline;" href="https://slack.com/oauth/v2/authorize?client_id=39065726036.1542208008273&scope=commands,incoming-webhook&user_scope=">follow
+                                            these instructions</a></p>
+                                </div>
+                                <!--end feature-box-->
+                            </div>
+                            <!--end col-->
+                            <div class="col-md-3">
+                                <div class="feature-box">
+                                    <figure>
+                                        <img src="assets/icons/feature-upload.png" alt="">
+                                        <span>2</span>
+                                    </figure>
+                                    <h3>Submit Your Ad</h3>
+                                    <p>Just type: <br>/marketplace sell <i>item for $price</i>
+                                    <br>or /marketplace add <i>item for $price</i></p>
+                                </div>
+                                <!--end feature-box-->
+                            </div>
+                            <!--end col-->
+                            <div class="col-md-3">
+                                <div class="feature-box">
+                                    <figure>
+                                        <img src="assets/icons/feature-like.png" alt="">
+                                        <span>3</span>
+                                    </figure>
+                                    <h3>Make a Deal</h3>
+                                    <p>Wait for messages from your coworkers</p>
+                                </div>
+                                <!--end feature-box-->
+                            </div>
+                            <!--end col-->
+                            <div class="col-md-3">
+                                <div class="feature-box">
+                                    <figure>
+                                        <img src="assets/icons/feature-wallet.png" alt="">
+                                        <span>4</span>
+                                    </figure>
+                                    <h3>You made money!</h3>
+                                    <p>Now, you can spend it: <br>/marketplace buy <i>item</i>
+                                    <br>or /marketplace search <i>item</i></p>
+                                </div>
+                                <!--end feature-box-->
+                            </div>
+                            <!--end col-->
+                        </div>
+                        <!--end row-->
+                    </div>
+                    <!--end block-->
+                </div>
+                <!--end container-->
+                <div class="background" data-background-color="#fff"></div>
+                <!--end background-->
+            </section>
+            <!--end block-->
+            <!--============ End Features Steps =====================================================================-->
+            <section class="block">
+                <div class="container">
+
+                    <!--============ Section Title===================================================================-->
+                    <div class="section-title clearfix">
+                        <div class="float-xl-left float-md-left float-sm-none">
+                            <h2>A glimpse into our listings</h2>
+                        </div>
+
+                    </div>
+                    <!--============ Items ==========================================================================-->
+                    <div class="items masonry grid-xl-4-items grid-lg-3-items grid-md-2-items">
+                        <div class="item">
+                            <div class="ribbon-featured">Featured</div>
+                            <!--end ribbon-->
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Home & Decor</a>
+                                        <a href="#" class="title">Furniture for sale</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="#" class="image-wrapper background-image">
+                                        <img src="assets/img/image-19.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Norwalk, CT</a>
+                                </h4>
+                                <div class="price">$400</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>02.05.2021
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Kitt Nortis
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>Got an ikea couch/bed for sale in Norwalk, only a year old and kept very clean, asking $400 or best offer.</p>
+                                </div>
+                                <!--end description-->
+                                
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Cameras</a>
+                                        <a href="#" class="title">Retro Camera</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="#" class="image-wrapper background-image">
+                                        <img src="assets/img/image-19.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Bethany, WV</a>
+                                </h4>
+                                <div class="price">$120</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>20.12.2019
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Piord Nelsion
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>A must have classic! Nikon F in a pretty acceptable condition. Asking $120 without the lens. 
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Brand</figure>
+                                            <aside>Nikon</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Model</figure>
+                                            <aside>F 35mm SLR </aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Computer</a>
+                                        <a href="#" class="title">Will Buy MacBook Pro</a>
+                                        <span class="tag">Demand</span>
+                                    </h3>
+                                    <a href="#" class="image-wrapper background-image">
+                                        <img src="assets/img/image-19.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Elmsford, NJ</a>
+                                </h4>
+                                <div class="price">
+                                    <span class="appendix">Max</span>
+                                    $1,800
+                                </div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>10.10.2020
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Timothian
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>I need a MacBook Pro that still runs on Mojave!
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Screen Size</figure>
+                                            <aside>17"</aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Education</a>
+                                        <a href="#" class="title">Creative Course</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="#" class="image-wrapper background-image">
+                                        <img src="assets/img/image-19.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Nashville, TN</a>
+                                </h4>
+                                <div class="price">$125</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>28.04.2020
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Zete Brownern
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>1 lesson/week, all you need is your iPad and Apple Pencil. Kidding, pen & paper would do! </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Start Date</figure>
+                                            <aside>25.06.2017 09:00</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Length</figure>
+                                            <aside>2 months</aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <a href="https://slack.com/oauth/v2/authorize?client_id=39065726036.1542208008273&scope=commands,incoming-webhook&user_scope=" class="item call-to-action">
+                            <div class="wrapper">
+                                <div class="title">
+                                    <i class="fa fa-plus-square-o"></i>
+                                    Submit Your Ad
+                                </div>
+                            </div>
+                        </a>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Adventure</a>
+                                        <a href="#" class="title">Into The Wild</a>
+                                        <span class="tag">Ad</span>
+                                    </h3>
+                                    <a href="#" class="image-wrapper background-image">
+                                        <img src="assets/img/image-19.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Seattle, WA</a>
+                                </h4>
+                                <div class="price">$0</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>21.01.2021
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Peaki Agenhe
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>It's been a while! Will go for hiking this Sunday. Any takers?
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Real Estate</a>
+                                        <a href="#" class="title">Luxury Apartment</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="#" class="image-wrapper background-image">
+                                        <img src="assets/img/image-19.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Greeley, CO</a>
+                                </h4>
+                                <div class="price">$775,000</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>13.03.2019
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Hillars Estöte
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>My sister is selling her great spot, close to city, 3br 2ba, $775k OBO</p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Area</figure>
+                                            <aside>1268m<sup>2</sup></aside>
+                                        </li>
+                                        <li>
+                                            <figure>Bathrooms</figure>
+                                            <aside>2</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Bedrooms</figure>
+                                            <aside>3</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Garage</figure>
+                                            <aside>1</aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                
+                            </div>
+                        </div>
+                        <!--end item-->
+
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Mobiles</a>
+                                        <a href="#" class="title">Used Smartphone</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="#" class="image-wrapper background-image">
+                                        <img src="assets/img/image-19.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">West Roxbury, MA</a>
+                                </h4>
+                                <div class="price">$20</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>28.02.2020
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Glonia A. Crownerd
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>Look what I found in the attic! Want a flip phone for just $20? HMU!
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Status</figure>
+                                            <aside>Used</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Brand</figure>
+                                            <aside>Samsung</aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                
+                            </div>
+                        </div>
+                        <!--end item-->
+                    </div>
+                    <!--============ End Items ======================================================================-->
+
+                </div>
+                <!--end container-->
+            </section>
+            <!--end block-->
+        </section>
+
+        <!--end content-->
+
+        <!--*********************************************************************************************************-->
+        <!--************ FOOTER *************************************************************************************-->
+        <!--*********************************************************************************************************-->
+        <footer class="footer">
+            <div class="wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <a href="#" class="brand">
+                                <img src="assets/img/marketplacelogo.png" alt="">
+                            </a>
+                            <p>
+                                Marketplace is a simple yet powerful Slack Bot that enables Slack users to list their
+                                items for sale,
+                                and let anyone search for them using keywords.
+                            </p>
+                        </div>
+                        <!--end col-md-5-->
+                        <div class="col-md-3">
+                            <h2>Navigation</h2>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-6">
+                                    <nav>
+                                        <ul class="list-unstyled">
+                                            <li>
+                                                <a href="#">Home</a>
+                                            </li>
+                                            <li>
+                                                <a href="support">Support</a>
+                                            </li>
+                                            <li>
+                                                <a href="privacy-policy">Privacy Policy</a>
+                                            </li>
+                                            <li>
+                                                <a href="terms-and-conditions">Terms & Conditions</a>
+                                            </li>
+                                            <li>
+                                                <a href="contact">Contact</a>
+                                            </li>
+                                            <li>
+                                                <a
+                                                    href="https://slack.com/oauth/v2/authorize?client_id=39065726036.1542208008273&scope=commands,incoming-webhook&user_scope=">Add
+                                                    to Slack</a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--end col-md-3-->
+                        <div class="col-md-4">
+                            <h2>Contact</h2>
+                            <address>
+                                <figure>
+                                    Made with fun in Connecticut, with huge help from Melbourne<br>
+                                    2020 - Now
+                                </figure>
+                                <br>
+                                <strong>Email:</strong> <a href="mailto:buysell@marketplaceforslack.com">buysell@marketplaceforslack.com</a>
+                                <br><br>
+                                <a href="contact" class="btn btn-primary text-caps btn-framed">Contact Us</a>
+                            </address>
+                        </div>
+                        <!--end col-md-4-->
+                    </div>
+                    <!--end row-->
+                </div>
+                <div class="background">
+                    <div class="background-image original-size"
+                        style="background-image: url('assets/img/footer-background-icons.jpg');">
+                        <img src="assets/img/footer-background-icons.jpg" alt="">
+                    </div>
+                    <!--end background-image-->
+                </div>
+                <!--end background-->
+            </div>
+        </footer>
+        <!--end footer-->
+    </div>
+    <!--end page-->
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Varela+Round" rel="stylesheet">
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/selectize.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/user.css">
+
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBEDfNcQRmKQEyulDN8nGWjLYPm8s4YB58&libraries=places"></script>-->
+    <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>-->
+    <script src="assets/js/selectize.min.js"></script>
+    <script src="assets/js/masonry.pkgd.min.js"></script>
+    <script src="assets/js/icheck.min.js"></script>
+    <script src="assets/js/jquery.validate.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+</body>
+
 </html>
