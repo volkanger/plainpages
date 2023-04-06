@@ -93,7 +93,9 @@ export async function onRequest({ context, env, request  }) {
       </div>
       <!--end item-->`]
 
-
+    searcheResults.forEach((item) => {
+        console.log(item);
+    });
 
     for (let item in searcheResults) {
       cards.push(`<div class="item">
