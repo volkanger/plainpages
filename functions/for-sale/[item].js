@@ -95,7 +95,7 @@ export async function onRequest({ context, env, request  }) {
 
 
 
-    for (item in searcheResults) {
+    for (let item in searcheResults) {
       cards.push(`<div class="item">
                   <div class="wrapper">
                       <div class="image">
