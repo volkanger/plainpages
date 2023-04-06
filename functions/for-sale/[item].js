@@ -94,19 +94,14 @@ export async function onRequest({ context, env, request  }) {
       <!--end item-->`]
 
     searcheResults.forEach((item) => {
-        console.log(item);
         console.log(item.title)
         console.log(item.owner)
-        console.log(item["title"])
-    });
-
-    for (let item in searcheResults) {
-      cards.push(`<div class="item">
+        cards.push(`<div class="item">
                   <div class="wrapper">
                       <div class="image">
                           <h3>
                               <a href="#" class="tag category">Adventure</a>
-                              <a href="single-listing-1.html" class="title">${JSON.stringify(item)} Into The Wild</a>
+                              <a href="single-listing-1.html" class="title">${item.title} Into The Wild</a>
                               <span class="tag">Ad</span>
                           </h3>
                           <a href="single-listing-1.html" class="image-wrapper background-image">
@@ -137,25 +132,8 @@ export async function onRequest({ context, env, request  }) {
                   </div>
               </div>
               <!--end item-->`)
+    });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-    
 
     let html = `
     <!doctype html>
