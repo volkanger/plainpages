@@ -24,7 +24,7 @@ export async function onRequest({ context, env, request  }) {
           console.log(i)
           const values = await env.marketplace.get(allKeys[i].name)
           console.log("values: " + values)
-          if (values && values.toLowerCase().includes(item.toLowerCase())) {
+          if (values && values.toLowerCase().includes(keyword.toLowerCase())) {
             foundKeys = foundKeys + 1
             console.log("matching values: " + values)
             //split the key so we know the seller team and userID
