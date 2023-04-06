@@ -1,4 +1,4 @@
-export async function onRequestPost({ context, request }) {
+export async function onRequest({ context, request }) {
   try {
     console.log("I'm alive")
     console.log("There's a request.")
@@ -10,8 +10,10 @@ export async function onRequestPost({ context, request }) {
     console.log(keyword)
        
     //learn how to patch pages to kv
-    const allKeys = (await context.env.marketplace.list({"prefix": "available:"})).keys
+    const allKeys = await context.env.marketplace.get("hadi")
+    //const allKeys = (await context.env.marketplace.list({"prefix": "available:"})).keys
     console.log(allKeys)
+    return new Response(allKeys)
     //     if (allKeys.length == 0) { //no listings ever.
     //         return new JsonResponse({
     //           type: 4,
