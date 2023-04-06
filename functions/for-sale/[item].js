@@ -95,6 +95,9 @@ export async function onRequest({ context, env, request  }) {
 
     searcheResults.forEach((item) => {
         console.log(item);
+        console.log(item.title)
+        console.log(item.owner)
+        console.log(item["title"])
     });
 
     for (let item in searcheResults) {
