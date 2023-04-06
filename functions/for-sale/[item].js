@@ -16,7 +16,7 @@ export async function onRequest({ context, env, request  }) {
     async function search(keyword) {
       var foundKeys = 0
       var i = 0
-      var searchResults = ""
+      var searchResults = []
       for (i = 0; i < allKeys.length; i++) {
         //console.log(i)
         const values = await env.marketplace.get(allKeys[i].name)
@@ -25,13 +25,20 @@ export async function onRequest({ context, env, request  }) {
           foundKeys = foundKeys + 1
           console.log("matching values: " + values)
           //split the key so we know the seller team and userID
-          // const item_owner_user_id = allKeys[i].name.split(":")[3]
+          const item_owner_user_id = allKeys[i].name.split(":")[3]
+          const itemPlatform = allKeys[i].name.split(":")[1]
+          const price = values.split("for $")[1]
           //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
           //split 0 is available
           //split1 is discord
           //split 2 is team, split 3 is user
           //use sections[1] + sections[2] down instead of team_id and user_id below
-          searchResults = searchResults + values
+          let object = {
+            "title" : values,
+            "owner" : item_owner_user_id,
+            "price" : price
+          }
+          searchResults.push(object)
           // searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
           // console.log(searchResults)
         } 
@@ -48,6 +55,102 @@ export async function onRequest({ context, env, request  }) {
     let searcheResults = await search(keyword)
     console.log(searcheResults)
     console.log(JSON.stringify(searcheResults))
+
+    let cards = [`<div class="item">
+        <div class="wrapper">
+            <div class="image">
+                <h3>
+                    <a href="#" class="tag category">Adventure</a>
+                    <a href="single-listing-1.html" class="title">Poker of The WildCards</a>
+                    <span class="tag">Ad</span>
+                </h3>
+                <a href="single-listing-1.html" class="image-wrapper background-image">
+                    <img src="assets/img/image-03.jpg" alt="">
+                </a>
+            </div>
+            <!--end image-->
+            <h4 class="location">
+                <a href="#">Seattle, WA</a>
+            </h4>
+            <div class="price">$1,560</div>
+            <div class="meta">
+                <figure>
+                    <i class="fa fa-calendar-o"></i>21.04.2017
+                </figure>
+                <figure>
+                    <a href="#">
+                        <i class="fa fa-user"></i>Peak Agency
+                    </a>
+                </figure>
+            </div>
+            <!--end meta-->
+            <div class="description">
+                <p>Nam eget ullamcorper massa. Morbi fringilla lectus nec lorem tristique gravida</p>
+            </div>
+            <!--end description-->
+            <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+        </div>
+      </div>
+      <!--end item-->`]
+
+
+
+    for (item in searcheResults) {
+      cards.push(`<div class="item">
+                  <div class="wrapper">
+                      <div class="image">
+                          <h3>
+                              <a href="#" class="tag category">Adventure</a>
+                              <a href="single-listing-1.html" class="title">${item.title} Into The Wild</a>
+                              <span class="tag">Ad</span>
+                          </h3>
+                          <a href="single-listing-1.html" class="image-wrapper background-image">
+                              <img src="assets/img/image-03.jpg" alt="">
+                          </a>
+                      </div>
+                      <!--end image-->
+                      <h4 class="location">
+                          <a href="#">Seattle, WA</a>
+                      </h4>
+                      <div class="price">$1,560</div>
+                      <div class="meta">
+                          <figure>
+                              <i class="fa fa-calendar-o"></i>21.04.2017
+                          </figure>
+                          <figure>
+                              <a href="#">
+                                  <i class="fa fa-user"></i>Peak Agency
+                              </a>
+                          </figure>
+                      </div>
+                      <!--end meta-->
+                      <div class="description">
+                          <p>Nam eget ullamcorper massa. Morbi fringilla lectus nec lorem tristique gravida</p>
+                      </div>
+                      <!--end description-->
+                      <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                  </div>
+              </div>
+              <!--end item-->`)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+    
 
     let html = `
     <!doctype html>
@@ -221,7 +324,7 @@ export async function onRequest({ context, env, request  }) {
                         let clean = DOMPurify.sanitize(keywordInput.value);
                         const keywordValue = clean.trim().replaceAll(" ", "-");
                         if (keywordValue) {
-                            form.action = `/for-sale/${keywordValue}`;
+                            form.action = "/for-sale/" + keywordValue;
                             form.submit();
                         }
                     });
@@ -244,166 +347,41 @@ export async function onRequest({ context, env, request  }) {
         <!--************ CONTENT ************************************************************************************-->
         <!--*********************************************************************************************************-->
         <section class="content">
-            <!--============ Categories =============================================================================-->
             <section class="block">
                 <div class="container">
-                    <h2>Categories</h2>
-                    <ul class="categories-list clearfix">
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-furniture-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Furniture</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Beds</a>
-                                <a href="#">Sofas</a>
-                                <a href="#">Garden</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-pets-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Pets</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Dogs</a>
-                                <a href="#">Cats</a>
-                                <a href="#">Exotic</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-real-estate-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Real Estate</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Houses</a>
-                                <a href="#">Apartments</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-jobs-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Jobs</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Find Job</a>
-                                <a href="#">Offer Job</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
+                    <!--============ Section Title===================================================================-->
+                    <div class="section-title clearfix">
+                        <div class="float-left float-xs-none">
+                            <label class="mr-3 align-text-bottom">Sort by: </label>
+                            <select name="sorting" id="sorting" class="small width-200px" data-placeholder="Default Sorting" >
+                                <option value="">Default Sorting</option>
+                                <option value="1">Newest First</option>
+                                <option value="2">Oldest First</option>
+                                <option value="3">Lowest Price First</option>
+                                <option value="4">Highest Price First</option>
+                            </select>
 
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-cars-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Car</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">New</a>
-                                <a href="#">Used</a>
-                                <a href="#">Rent</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-mobile-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Mobile</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Apple</a>
-                                <a href="#">Samsung</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-cameras-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Cameras</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Photo</a>
-                                <a href="#">Video</a>
-                                <a href="#">Lenses</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-sport-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Sport</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Ski</a>
-                                <a href="#">Bike</a>
-                                <a href="#">Hockey</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-electro-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Electro</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">TV</a>
-                                <a href="#">Radio</a>
-                                <a href="#">PC</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-clothing-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Clothing</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Shirts</a>
-                                <a href="#">Trousers</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-books-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Books</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Fantasy</a>
-                                <a href="#">History</a>
-                                <a href="#">Sci-Fi</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                        <li>
-                            <i class="category-icon">
-                                <img src="assets/icons/category-music-b.png" alt="">
-                            </i>
-                            <h3><a href="#">Music</a></h3>
-                            <div class="sub-categories">
-                                <a href="#">Rock</a>
-                                <a href="#">Techno</a>
-                                <a href="#">Folk</a>
-                            </div>
-                        </li>
-                        <!--end category item-->
-                    </ul>
-                    <!--end categories-list-->
-                </div>
-                <!--end container-->
-            </section>
-            <!--end block-->
-            <!--============ End Categories =========================================================================-->
-            <!--============ Featured Ads ===========================================================================-->
-            <section class="block">
-                <div class="container">
-                    <h2>Featured Ads</h2>
-                    <div class="items grid grid-xl-3-items grid-lg-3-items grid-md-2-items">
+                        </div>
+                        <div class="float-right d-xs-none thumbnail-toggle">
+                            <a href="#" class="change-class" data-change-from-class="list" data-change-to-class="grid" data-parent-class="items">
+                                <i class="fa fa-th"></i>
+                            </a>
+                            <a href="#" class="change-class active" data-change-from-class="grid" data-change-to-class="list" data-parent-class="items">
+                                <i class="fa fa-th-list"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <!--============ Items ==========================================================================-->
+                    ${cards}
+                    <div class="items list grid-xl-4-items grid-lg-3-items grid-md-2-items">
                         <div class="item">
+                            <div class="ribbon-diagonal">
+                                <div class="ribbon-diagonal__inner">
+                                    <span>Sold</span>
+                                </div>
+                            </div>
+                            <div class="ribbon-featured">Featured</div>
+                            <!--end ribbon-->
                             <div class="wrapper">
                                 <div class="image">
                                     <h3>
@@ -531,82 +509,6 @@ export async function onRequest({ context, env, request  }) {
                         </div>
                         <!--end item-->
 
-                    </div>
-                </div>
-                <div class="background" data-background-color="#fff"></div>
-                <!--end background-->
-            </section>
-            <!--============ End Featured Ads =======================================================================-->
-            <!--============ Features Steps =========================================================================-->
-            <section class="block has-dark-background">
-                <div class="container">
-                    <div class="block">
-                        <h2>Selling With Us Is Easy</h2>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="feature-box">
-                                    <figure>
-                                        <img src="assets/icons/feature-user.png" alt="">
-                                        <span>1</span>
-                                    </figure>
-                                    <h3>Create an Account</h3>
-                                    <p>Etiam molestie viverra dui vitae mattis. Ut velit est</p>
-                                </div>
-                                <!--end feature-box-->
-                            </div>
-                            <!--end col-->
-                            <div class="col-md-3">
-                                <div class="feature-box">
-                                    <figure>
-                                        <img src="assets/icons/feature-upload.png" alt="">
-                                        <span>2</span>
-                                    </figure>
-                                    <h3>Submit Your Ad</h3>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                                <!--end feature-box-->
-                            </div>
-                            <!--end col-->
-                            <div class="col-md-3">
-                                <div class="feature-box">
-                                    <figure>
-                                        <img src="assets/icons/feature-like.png" alt="">
-                                        <span>3</span>
-                                    </figure>
-                                    <h3>Make a Deal</h3>
-                                    <p>Nunc ultrices eu urna quis cursus. Sed viverra ullamcorper</p>
-                                </div>
-                                <!--end feature-box-->
-                            </div>
-                            <!--end col-->
-                            <div class="col-md-3">
-                                <div class="feature-box">
-                                    <figure>
-                                        <img src="assets/icons/feature-wallet.png" alt="">
-                                        <span>4</span>
-                                    </figure>
-                                    <h3>Enjoy the Money!</h3>
-                                    <p>Integer nisl ipsum, sodales sed scelerisque nec, aliquet sit</p>
-                                </div>
-                                <!--end feature-box-->
-                            </div>
-                            <!--end col-->
-                        </div>
-                        <!--end row-->
-                    </div>
-                    <!--end block-->
-                </div>
-                <!--end container-->
-                <div class="background" data-background-color="#2b2b2b"></div>
-                <!--end background-->
-            </section>
-            <!--end block-->
-            <!--============ End Features Steps =====================================================================-->
-            <!--============ Recent Ads =============================================================================-->
-            <section class="block">
-                <div class="container">
-                    <h2>Recent Ads</h2>
-                    <div class="items grid grid-xl-4-items grid-lg-3-items grid-md-2-items">
                         <div class="item">
                             <div class="wrapper">
                                 <div class="image">
@@ -941,6 +843,16 @@ export async function onRequest({ context, env, request  }) {
                         </div>
                         <!--end item-->
 
+                        <a href="submit.html" class="item call-to-action">
+                            <div class="wrapper">
+                                <div class="title">
+                                    <i class="fa fa-plus-square-o"></i>
+                                    Submit Your Ad
+                                </div>
+                            </div>
+                        </a>
+                        <!--end item-->
+
                         <div class="item">
                             <div class="wrapper">
                                 <div class="image">
@@ -1035,94 +947,458 @@ export async function onRequest({ context, env, request  }) {
                             </div>
                         </div>
                         <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Cameras</a>
+                                        <a href="single-listing-1.html" class="title">Retro Camera</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img src="assets/img/image-12.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Bethany, WV</a>
+                                </h4>
+                                <div class="price">$120</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>20.12.2016
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Paula Nelson
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>In vitae purus bibendum, mattis ex nec, eleifend diam. Cras at vehicula metus.
+                                        Sed elementum lectus ut aliquet vehicula.
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Brand</figure>
+                                            <aside>Nikon</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Model</figure>
+                                            <aside>F 35mm SLR </aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Food</a>
+                                        <a href="single-listing-1.html" class="title">Fresh Bio Vegetables</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img src="assets/img/image-13.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Grand Rapids, MI</a>
+                                </h4>
+                                <div class="price">
+                                    <span class="appendix">From</span>
+                                    $120
+                                </div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>20.12.2016
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Paula Nelson
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>In vitae purus bibendum, mattis ex nec, eleifend diam. Cras at vehicula metus.
+                                        Sed elementum lectus ut aliquet vehicula.
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Brand</figure>
+                                            <aside>Nikon</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Model</figure>
+                                            <aside>F 35mm SLR </aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Restaurants</a>
+                                        <a href="single-listing-1.html" class="title">XL Baron Burger</a>
+                                        <span class="tag">Ad</span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img src="assets/img/image-14.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Burbank, CA</a>
+                                </h4>
+                                <div class="price">$120</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>18.12.2016
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Burger Barons
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>Vestibulum sodales turpis eget venenatis iaculis. Nam pulvinar mollis tortor, eu
+                                        lobortis mauris luctus non. Integer lobortis sapien enim, ut imperdiet leo faucibus id.
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="ribbon-featured">Featured</div>
+                            <!--end ribbon-->
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Photo & Camera</a>
+                                        <a href="single-listing-1.html" class="title">Professional Photo Shooting</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img src="assets/img/image-15.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Cambridge, MA</a>
+                                </h4>
+                                <div class="price">
+                                    <span class="appendix">From</span>
+                                    $350
+                                </div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>12.11.2016
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Kate's Photo
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>Morbi lectus massa, consequat blandit eleifend et, venenatis ut orci.
+                                        Vestibulum finibus metus at lacus egestas pulvinar.
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Sport</a>
+                                        <a href="single-listing-1.html" class="title">Urban Bike</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img src="assets/img/image-16.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Freeport, TX</a>
+                                </h4>
+                                <div class="price">$140</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>06.11.2016
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Laura
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>Morbi egestas elit et orci interdum, ac tincidunt diam feugiat. Aliquam erat volutpat.
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Brand</figure>
+                                            <aside>Trek</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Size</figure>
+                                            <aside>Large</aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Real Estate</a>
+                                        <a href="single-listing-1.html" class="title">Luxury Villa</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img src="assets/img/image-17.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">St Joe, IN </a>
+                                </h4>
+                                <div class="price">$360,000</div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>17.10.2016
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Homeland Estate
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>nteger imperdiet finibus ipsum vitae scelerisque. Vestibulum sodales turpis eget venenatis iaculis.
+                                        Nam pulvinar mollis tortor, eu lobortis mauris luctus non. Integer lobortis sapien enim
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Area</figure>
+                                            <aside>5,620m<sup>2</sup></aside>
+                                        </li>
+                                        <li>
+                                            <figure>Size</figure>
+                                            <aside>Large</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Bedrooms</figure>
+                                            <aside>4</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Bathrooms</figure>
+                                            <aside>3</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Garages</figure>
+                                            <aside>4</aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Cars</a>
+                                        <a href="single-listing-1.html" class="title">Car Wheels</a>
+                                        <span class="tag">Offer</span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img src="assets/img/image-18.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Bryan, TX</a>
+                                </h4>
+                                <div class="price">
+                                    <span class="appendix">From</span>
+                                    $140
+                                </div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>12.10.2016
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>George R. Mund
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>Duis tempor velit vel lectus viverra, et finibus justo semper. Morbi egestas elit et
+                                        orci interdum, ac tincidunt diam feugiat. Aliquam erat volutpat. Lorem ipsum dolor
+                                        sit amet, consectetur adipiscing elit
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Size</figure>
+                                            <aside>From 17"</aside>
+                                        </li>
+                                        <li>
+                                            <figure>Material</figure>
+                                            <aside>Alloy</aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+
+                        <div class="item">
+                            <div class="wrapper">
+                                <div class="image">
+                                    <h3>
+                                        <a href="#" class="tag category">Computer</a>
+                                        <a href="single-listing-1.html" class="title">Will Buy MacBook Pro</a>
+                                        <span class="tag">Demand</span>
+                                    </h3>
+                                    <a href="single-listing-1.html" class="image-wrapper background-image">
+                                        <img src="assets/img/image-19.jpg" alt="">
+                                    </a>
+                                </div>
+                                <!--end image-->
+                                <h4 class="location">
+                                    <a href="#">Elmsford, NJ</a>
+                                </h4>
+                                <div class="price">
+                                    <span class="appendix">Max</span>
+                                    $2,500
+                                </div>
+                                <div class="meta">
+                                    <figure>
+                                        <i class="fa fa-calendar-o"></i>10.10.2016
+                                    </figure>
+                                    <figure>
+                                        <a href="#">
+                                            <i class="fa fa-user"></i>Timothy
+                                        </a>
+                                    </figure>
+                                </div>
+                                <!--end meta-->
+                                <div class="description">
+                                    <p>Quisque in tincidunt quam, quis blandit orci. Proin semper leo mi, efficitur lacinia nunc blandit ac.
+                                        Vestibulum congue at justo semper dignissim.
+                                    </p>
+                                </div>
+                                <!--end description-->
+                                <div class="additional-info">
+                                    <ul>
+                                        <li>
+                                            <figure>Screen Size</figure>
+                                            <aside>17"</aside>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--end addition-info-->
+                                <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                            </div>
+                        </div>
+                        <!--end item-->
+
                     </div>
+                    <!--============ End Items ======================================================================-->
+                    <div class="page-pagination">
+                        <nav aria-label="Pagination">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">
+                                            <i class="fa fa-chevron-left"></i>
+                                        </span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                </li>
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">3</a>
+                                </li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">
+                                            <i class="fa fa-chevron-right"></i>
+                                        </span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!--end page-pagination-->
                 </div>
                 <!--end container-->
             </section>
             <!--end block-->
-            <!--============ End Recent Ads =========================================================================-->
-            <!--============ Newsletter =============================================================================-->
-            <section class="block">
-                <div class="container">
-                    <div class="box has-dark-background">
-                        <div class="row align-items-center justify-content-center d-flex">
-                            <div class="col-md-10 py-5">
-                                <h2>Get the Latest Ads in Your Inbox</h2>
-                                <form class="form email">
-                                    <div class="form-row">
-                                        <div class="col-md-4 col-sm-4">
-                                            <div class="form-group">
-                                                <label for="newsletter-category" class="col-form-label">Category?</label>
-                                                <select name="newsletter-category" id="newsletter-category" data-placeholder="Select Category" >
-                                                    <option value="">Select Category</option>
-                                                    <option value="1">Computers</option>
-                                                    <option value="2">Real Estate</option>
-                                                    <option value="3">Cars & Motorcycles</option>
-                                                    <option value="4">Furniture</option>
-                                                    <option value="5">Pets & Animals</option>
-                                                </select>
-                                            </div>
-                                            <!--end form-group-->
-                                        </div>
-                                        <!--end col-md-4-->
-                                        <div class="col-md-7 col-sm-7">
-                                            <div class="form-group">
-                                                <label for="newsletter-email" class="col-form-label">Your Email</label>
-                                                <input name="newsletter-email" type="email" class="form-control" id="newsletter-email" placeholder="Your Email">
-                                            </div>
-                                            <!--end form-group-->
-                                        </div>
-                                        <!--end col-md-9-->
-                                        <div class="col-md-1 col-sm-1">
-                                            <div class="form-group">
-                                                <label class="invisible">.</label>
-                                                <button type="submit" class="btn btn-primary width-100"><i class="fa fa-chevron-right"></i></button>
-                                            </div>
-                                            <!--end form-group-->
-                                        </div>
-                                        <!--end col-md-9-->
-                                    </div>
-                                </form>
-                                <!--end form-->
-                            </div>
-                        </div>
-                        <div class="background">
-                            <div class="background-image">
-                                <img src="assets/img/hero-background-image-01.jpg" alt="">
-                            </div>
-                            <!--end background-image-->
-                        </div>
-                        <!--end background-->
-                    </div>
-                    <!--end box-->
-                </div>
-                <!--end container-->
-            </section>
-            <!--end block-->
-
-            <section class="block">
-                <div class="container">
-                    <div class="d-flex align-items-center justify-content-around">
-                        <a href="#">
-                            <img src="assets/img/partner-1.png" alt="">
-                        </a>
-                        <a href="#">
-                            <img src="assets/img/partner-2.png" alt="">
-                        </a>
-                        <a href="#">
-                            <img src="assets/img/partner-3.png" alt="">
-                        </a>
-                        <a href="#">
-                            <img src="assets/img/partner-4.png" alt="">
-                        </a>
-                        <a href="#">
-                            <img src="assets/img/partner-5.png" alt="">
-                        </a>
-                    </div>
-                </div>
-
-            </section>
-
         </section>
         <!--end content-->
 
@@ -1135,56 +1411,45 @@ export async function onRequest({ context, env, request  }) {
                     <div class="row">
                         <div class="col-md-5">
                             <a href="#" class="brand">
-                                <img src="assets/img/logo.png" alt="">
+                                <img src="assets/img/marketplacelogo.png" alt="">
                             </a>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nec tincidunt arcu, sit amet
-                                fermentum sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra.
+                                Marketplace is a simple yet powerful Slack Bot that enables Slack users to list their
+                                items for sale,
+                                and let anyone search for them using keywords.
                             </p>
                         </div>
                         <!--end col-md-5-->
                         <div class="col-md-3">
                             <h2>Navigation</h2>
                             <div class="row">
-                                <div class="col-md-6 col-sm-6">
+                                <div class="col-md-12 col-sm-6">
                                     <nav>
                                         <ul class="list-unstyled">
                                             <li>
                                                 <a href="#">Home</a>
                                             </li>
                                             <li>
-                                                <a href="#">Listing</a>
+                                                <a href="support">Support</a>
                                             </li>
                                             <li>
-                                                <a href="#">Pages</a>
+                                                <a href="privacy-policy">Privacy Policy</a>
                                             </li>
                                             <li>
-                                                <a href="#">Extras</a>
+                                                <a href="terms-and-conditions">Terms & Conditions</a>
                                             </li>
                                             <li>
-                                                <a href="#">Contact</a>
+                                                <a href="contact">Contact</a>
                                             </li>
                                             <li>
-                                                <a href="#">Submit Ad</a>
+                                                <a
+                                                    href="https://slack.com/oauth/v2/authorize?client_id=39065726036.1542208008273&scope=commands,incoming-webhook&user_scope=">Add
+                                                    to Slack</a>
                                             </li>
                                         </ul>
                                     </nav>
                                 </div>
-                                <div class="col-md-6 col-sm-6">
-                                    <nav>
-                                        <ul class="list-unstyled">
-                                            <li>
-                                                <a href="#">My Ads</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Sign In</a>
-                                            </li>
-                                            <li>
-                                                <a href="#">Register</a>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
+
                             </div>
                         </div>
                         <!--end col-md-3-->
@@ -1192,16 +1457,13 @@ export async function onRequest({ context, env, request  }) {
                             <h2>Contact</h2>
                             <address>
                                 <figure>
-                                    124 Abia Martin Drive<br>
-                                    New York, NY 10011
+                                    Made with fun in Connecticut, with huge help from Melbourne<br>
+                                    2020 - Now
                                 </figure>
                                 <br>
-                                <strong>Email:</strong> <a href="#">hello@example.com</a>
-                                <br>
-                                <strong>Skype: </strong> Craigs
-                                <br>
-                                <br>
-                                <a href="contact.html" class="btn btn-primary text-caps btn-framed">Contact Us</a>
+                                <strong>Email:</strong> <a href="mailto:buysell@marketplaceforslack.com">buysell@marketplaceforslack.com</a>
+                                <br><br>
+                                <a href="contact" class="btn btn-primary text-caps btn-framed">Contact Us</a>
                             </address>
                         </div>
                         <!--end col-md-4-->
@@ -1209,26 +1471,27 @@ export async function onRequest({ context, env, request  }) {
                     <!--end row-->
                 </div>
                 <div class="background">
-                    <div class="background-image original-size">
+                    <div class="background-image original-size"
+                        style="background-image: url('assets/img/footer-background-icons.jpg');">
                         <img src="assets/img/footer-background-icons.jpg" alt="">
                     </div>
                     <!--end background-image-->
                 </div>
                 <!--end background-->
             </div>
-        </>
+        </footer>
         <!--end footer-->
     </div>
     <!--end page-->
 
-	<script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="assets/js/popper.min.js"></script>
-	<script type="text/javascript" src="assets/bootstrap/js/bootstrap.min.js"></script> 
-	<script src="assets/js/selectize.min.js"></script>
-	<script src="assets/js/masonry.pkgd.min.js"></script>
-	<script src="assets/js/icheck.min.js"></script>
-	<script src="assets/js/jquery.validate.min.js"></script>
-	<script src="assets/js/custom.js"></script>
+	<script src="/assets/js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="/assets/js/popper.min.js"></script>
+	<script type="text/javascript" src="/assets/bootstrap/js/bootstrap.min.js"></script> 
+	<script src="/assets/js/selectize.min.js"></script>
+	<script src="/assets/js/masonry.pkgd.min.js"></script>
+	<script src="/assets/js/icheck.min.js"></script>
+	<script src="/assets/js/jquery.validate.min.js"></script>
+	<script src="/assets/js/custom.js"></script>
 
 </body>
 </html>
@@ -1243,7 +1506,7 @@ export async function onRequest({ context, env, request  }) {
 
 
 
-    return new Response(html, {
+    return new Response(searcheResults, {
       headers: {
         "content-type": "text/html;charset=UTF-8",
       },
