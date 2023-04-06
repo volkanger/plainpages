@@ -18,7 +18,7 @@
 
     <title>Marketplace for Slack ｜ Sell and Buy Among Coworkers - Home</title>
     <link rel="shortcut icon" type="image/jpg" href="assets/icons/marketplacefavicon.ico" />
-
+    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js" integrity="sha256-qC8Lb8Kuf+7eFjyMCnpTs3ROmu80jdxpOpgMXOvgORg=" crossorigin="anonymous"></script>
 
 </head>
 
@@ -127,6 +127,7 @@
                 <!--============ End Page Title =====================================================================-->
                 <!--============ Hero Form ==========================================================================-->
                 <form class="hero-form form" method="POST" action="" id="searchForm"">
+                    <input type="hidden" name="csrf_token" value="{{ __CF_PAGES_CSRF_TOKEN__ }}">
                     <div class="container">
                         <!--Main Form-->
                         <div class="main-search-form">
@@ -176,7 +177,8 @@
                 
                     form.addEventListener("submit", (event) => {
                         event.preventDefault();
-                        const keywordValue = keywordInput.value.trim().replace(" ", "-");
+                        let clean = DOMPurify.sanitize(keywordInput.value);
+                        const keywordValue = clean.trim().replaceAll(" ", "-");
                         if (keywordValue) {
                             form.action = `/for-sale/${keywordValue}`;
                             form.submit();
