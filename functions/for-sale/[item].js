@@ -33,7 +33,7 @@ export async function onRequest({ context, env, request  }) {
           const year = date.getFullYear();
           const month = ("0" + (date.getMonth() + 1)).slice(-2);
           const day = ("0" + date.getDate()).slice(-2);
-          const formattedDate = `${year}-${month}-${day}`;
+          const formattedDate = `${year}.${month}.${day}`;
           //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
           //split 0 is available
           //split1 is discord
