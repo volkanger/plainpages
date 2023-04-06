@@ -28,6 +28,12 @@ export async function onRequest({ context, env, request  }) {
           const item_owner_user_id = allKeys[i].name.split(":")[3]
           const itemPlatform = allKeys[i].name.split(":")[1]
           const price = values.split("for $")[1]
+          const timestamp = allKeys[i].name.split(":")[4]
+          const date = new Date(timestamp * 1000); // convert seconds to milliseconds
+          const year = date.getFullYear();
+          const month = ("0" + (date.getMonth() + 1)).slice(-2); // add leading zero to month
+          const day = ("0" + date.getDate()).slice(-2); // add leading zero to day
+          const formattedDate = `${year}-${month}-${day}`; // format date as yyyy-mm-dd
           //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
           //split 0 is available
           //split1 is discord
@@ -36,7 +42,9 @@ export async function onRequest({ context, env, request  }) {
           let object = {
             "title" : values,
             "owner" : item_owner_user_id,
-            "price" : price
+            "price" : price,
+            "platform" : itemPlatform,
+            "time" : formattedDate
           }
           searchResults.push(object)
           // searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
@@ -100,8 +108,8 @@ export async function onRequest({ context, env, request  }) {
                   <div class="wrapper">
                       <div class="image">
                           <h3>
-                              <a href="#" class="tag category">Adventure</a>
-                              <a href="single-listing-1.html" class="title">${item.title} Into The Wild</a>
+                              <a href="#" class="tag category">For Sale</a>
+                              <a href="single-listing-1.html" class="title">${item.title}</a>
                               <span class="tag">Ad</span>
                           </h3>
                           <a href="single-listing-1.html" class="image-wrapper background-image">
@@ -110,16 +118,16 @@ export async function onRequest({ context, env, request  }) {
                       </div>
                       <!--end image-->
                       <h4 class="location">
-                          <a href="#">Seattle, WA</a>
+                          <a href="#">${item.platform}</a>
                       </h4>
-                      <div class="price">$1,560</div>
+                      <div class="price">${item.price}</div>
                       <div class="meta">
                           <figure>
-                              <i class="fa fa-calendar-o"></i>21.04.2017
+                              <i class="fa fa-calendar-o"></i>${item.time}
                           </figure>
                           <figure>
                               <a href="#">
-                                  <i class="fa fa-user"></i>Peak Agency
+                                  <i class="fa fa-user"></i>${item.user}
                               </a>
                           </figure>
                       </div>
@@ -355,8 +363,8 @@ export async function onRequest({ context, env, request  }) {
                         </div>
                     </div>
                     <!--============ Items ==========================================================================-->
-                    ${cards}
                     <div class="items list grid-xl-4-items grid-lg-3-items grid-md-2-items">
+                    ${cards}
                         <div class="item">
                             <div class="ribbon-diagonal">
                                 <div class="ribbon-diagonal__inner">
