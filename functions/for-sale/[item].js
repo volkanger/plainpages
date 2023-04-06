@@ -44,8 +44,10 @@ export async function onRequest({ context, env, request  }) {
 
     console.log("---iguess ill see this before the rest")
     let searcheResults = await search(keyword)
+    console.log(searcheResults)
+    console.log(JSON.stringify(searcheResults))
 
-    return new Response(searcheResults)
+    return new Response(JSON.stringify(searcheResults))
   
 
 
