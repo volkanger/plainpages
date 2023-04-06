@@ -13,42 +13,39 @@ export async function onRequest({ context, env, request  }) {
     // const allKeys = await env.marketplace.get("available:T01C79S2HKP:U01JP332EP7:1616534585127")
     const allKeys = (await env.marketplace.list({"prefix": "available:"})).keys
 
-    if (allKeys.length == 0) { //no listings ever.
-      return new Response("Nothing on DB??!")
-    } else {
-      async function search(keyword) {
-        var foundKeys = 0
-        var i = 0
-        var searchResults = ""
-        for (i = 0; i < allKeys.length; i++) {
-          console.log(i)
-          const values = await env.marketplace.get(allKeys[i].name)
-          console.log("values: " + values)
-          if (values && values.toLowerCase().includes(keyword.toLowerCase())) {
-            foundKeys = foundKeys + 1
-            console.log("matching values: " + values)
-            //split the key so we know the seller team and userID
-            const item_owner_user_id = allKeys[i].name.split(":")[3]
-            //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
-            //split 0 is available
-            //split1 is discord
-            //split 2 is team, split 3 is user
-            //use sections[1] + sections[2] down instead of team_id and user_id below
-            searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
-            console.log(searchResults)
-            return searchResults
-          } 
-        }
-        console.log(searchResults)
-        if (searchResults.length == 0) {
-          console.log("nothing found")
-        }
+    async function search(keyword) {
+      var foundKeys = 0
+      var i = 0
+      var searchResults = ""
+      for (i = 0; i < allKeys.length; i++) {
+        console.log(i)
+        const values = await env.marketplace.get(allKeys[i].name)
+        console.log("values: " + values)
+        if (values && values.toLowerCase().includes(keyword.toLowerCase())) {
+          foundKeys = foundKeys + 1
+          console.log("matching values: " + values)
+          //split the key so we know the seller team and userID
+          const item_owner_user_id = allKeys[i].name.split(":")[3]
+          //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
+          //split 0 is available
+          //split1 is discord
+          //split 2 is team, split 3 is user
+          //use sections[1] + sections[2] down instead of team_id and user_id below
+          searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
+          console.log(searchResults)
+          return searchResults
+        } 
       }
-
-      let searchResults = await search(keyword)
-  
-      return new Response(searchResults)
+      console.log(searchResults)
+      if (searchResults.length == 0) {
+        console.log("nothing found")
+      }
     }
+
+    let searcheResults = await search(keyword)
+
+    return new Response(searcheResults)
+  
 
 
 
