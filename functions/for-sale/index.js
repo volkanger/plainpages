@@ -1,4 +1,4 @@
-export default function forSalePage() {
+export async function onRequest(context) {
     return (
         <main>
             <h1> All listings on /for-sale </h1>
