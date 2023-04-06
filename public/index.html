@@ -126,7 +126,7 @@
                 </div>
                 <!--============ End Page Title =====================================================================-->
                 <!--============ Hero Form ==========================================================================-->
-                <form class="hero-form form">
+                <form class="hero-form form" method="POST" action="" id="searchForm"">
                     <div class="container">
                         <!--Main Form-->
                         <div class="main-search-form">
@@ -170,6 +170,19 @@
                         </p>
                     </div>
                 </form>
+                <script>
+                    const form = document.getElementById("searchForm");
+                    const keywordInput = document.getElementById("what");
+                
+                    form.addEventListener("submit", (event) => {
+                        event.preventDefault();
+                        const keywordValue = keywordInput.value.trim().replace(" ", "-");
+                        if (keywordValue) {
+                            form.action = `/for-sale/${keywordValue}`;
+                            form.submit();
+                        }
+                    });
+                </script>
                 <!--============ End Hero Form ======================================================================-->
                 <div class="background">
                     <div class="background-image original-size"
