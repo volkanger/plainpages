@@ -5,9 +5,9 @@ export async function onRequest({ context, env, request  }) {
     console.log("I want to get to the bottom of this. ")
     
 		let input = await request.formData();
-    console.log(input)
+    // console.log(input)
     let keyword = input.get("keyword")
-    console.log(keyword)
+    console.log("keyword is: " + keyword)
        
     //learn how to patch pages to kv
     // const allKeys = await env.marketplace.get("available:T01C79S2HKP:U01JP332EP7:1616534585127")
@@ -25,14 +25,15 @@ export async function onRequest({ context, env, request  }) {
           foundKeys = foundKeys + 1
           console.log("matching values: " + values)
           //split the key so we know the seller team and userID
-          const item_owner_user_id = allKeys[i].name.split(":")[3]
+          // const item_owner_user_id = allKeys[i].name.split(":")[3]
           //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
           //split 0 is available
           //split1 is discord
           //split 2 is team, split 3 is user
           //use sections[1] + sections[2] down instead of team_id and user_id below
-          searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
-          console.log(searchResults)
+          searchResults += searchResults
+          // searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
+          // console.log(searchResults)
         } 
       }
       console.log(searchResults)
@@ -41,6 +42,7 @@ export async function onRequest({ context, env, request  }) {
       }
     }
 
+    console.log("---iguess ill see this before the rest")
     let searcheResults = await search(keyword)
 
     return new Response(searcheResults)
