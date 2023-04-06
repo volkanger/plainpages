@@ -45,7 +45,7 @@ export async function onRequest({ context, env, request  }) {
         }
       }
 
-      await search(keyword)
+      let searchResults = await search(keyword)
   
       return new Response(searchResults)
     }
