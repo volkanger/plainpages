@@ -67,24 +67,24 @@ export async function onRequest({ context, request }) {
 
 		// Convert FormData to JSON
 		// NOTE: Allows multiple values per key
-		let tmp, output = {};
-		for (let [key, value] of input) {
-			tmp = output[key];
-			if (tmp === undefined) {
-				output[key] = value;
-			} else {
-				output[key] = [].concat(tmp, value);
-			}
-		}
+		// let tmp, output = {};
+		// for (let [key, value] of input) {
+		// 	tmp = output[key];
+		// 	if (tmp === undefined) {
+		// 		output[key] = value;
+		// 	} else {
+		// 		output[key] = [].concat(tmp, value);
+		// 	}
+		// }
 
-		let pretty = JSON.stringify(output, null, 2);
-		return new Response(pretty, {
-			headers: {
-				'Content-Type': 'application/json;charset=utf-8'
-			}
-		});
+		// let pretty = JSON.stringify(output, null, 2);
+		// return new Response(pretty, {
+		// 	headers: {
+		// 		'Content-Type': 'application/json;charset=utf-8'
+		// 	}
+		// });
 	} catch (err) {
-		return new Response('Error parsing JSON content', { status: 400 });
+		return new Response(err, { status: 400 });
 	}
 }
 
