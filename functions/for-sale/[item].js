@@ -33,7 +33,6 @@ export async function onRequest({ context, env, request  }) {
           //use sections[1] + sections[2] down instead of team_id and user_id below
           searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
           console.log(searchResults)
-          return searchResults
         } 
       }
       console.log(searchResults)
