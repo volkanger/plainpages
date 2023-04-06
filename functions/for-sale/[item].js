@@ -31,7 +31,7 @@ export async function onRequest({ context, env, request  }) {
           //split1 is discord
           //split 2 is team, split 3 is user
           //use sections[1] + sections[2] down instead of team_id and user_id below
-          searchResults += values
+          searchResults = searchResults + values
           // searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
           // console.log(searchResults)
         } 
