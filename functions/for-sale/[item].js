@@ -44,7 +44,7 @@ export async function onRequest({ context, env, request  }) {
             "owner" : item_owner_user_id,
             "price" : price,
             "platform" : itemPlatform,
-            "time" : formattedDate
+            "time" : timestamp
           }
           searchResults.push(object)
           // searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
