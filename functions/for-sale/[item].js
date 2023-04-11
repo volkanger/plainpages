@@ -60,7 +60,7 @@ export async function onRequest({ context, env, request  }) {
       return searchResults
     }
 
-    console.log("---iguess ill see this before the rest")
+    console.log("---i guess ill see this before the rest")
     console.time("search keyword function starts")
     let searcheResults = await search(keyword)
     console.timeEnd("search ended")
