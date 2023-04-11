@@ -3,6 +3,7 @@ export async function onRequest({ context, env, request  }) {
     console.log("I'm alive")
     console.log("There's a request.")
     console.log("I want to get to the bottom of this. ")
+
     
 		let input = await request.formData();
     // console.log(input)
@@ -60,7 +61,9 @@ export async function onRequest({ context, env, request  }) {
     }
 
     console.log("---iguess ill see this before the rest")
+    console.time("search keyword function starts")
     let searcheResults = await search(keyword)
+    console.timeEnd("search ended")
     console.log(searcheResults)
     console.log(JSON.stringify(searcheResults))
 
