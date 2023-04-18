@@ -329,7 +329,7 @@ export async function onRequest({ context, env, request  }) {
                         let clean = DOMPurify.sanitize(keywordInput.value);
                         const keywordValue = clean.trim().replaceAll(" ", "-");
                         if (keywordValue) {
-                            form.action = "/for-sale/" + keywordValue;
+                            form.action = "/for-sale/${keywordValue}";
                             form.submit();
                         }
                     });
