@@ -378,7 +378,7 @@ export async function onRequest({ context, env, request  }) {
                     </div>
                     <!--============ Items ==========================================================================-->
                     <div class="items list grid-xl-4-items grid-lg-3-items grid-md-2-items">
-                    ${cards}
+                    ${cards.join("")}
                         
 
                         <div class="item">
