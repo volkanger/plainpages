@@ -31,20 +31,25 @@ export async function onRequest({ context, env, request  }) {
           console.log("matching values: " + values)
           //split the key so we know the seller team and userID
           const item_owner_user_id = availables[i].key.split(":")[3]
-          console.log(availables[i].key.split(":")[0])
-          console.log(availables[i].key.split(":")[1])
-          console.log(availables[i].key.split(":")[2])
-          console.log(availables[i].key.split(":")[3])
-          console.log(availables[i].key.split(":")[4])
-          console.log(availables[i].key.split(":")[5])
+          console.log(availables[i].key.split(":")[0]) //available
+          console.log(availables[i].key.split(":")[1]) //discord
+          console.log(availables[i].key.split(":")[2]) //001992934882
+          console.log(availables[i].key.split(":")[3]) //813849193249
+          console.log(availables[i].key.split(":")[4]) //1678371896959
+          console.log(availables[i].key.split(":")[5]) //null
           const itemPlatform = availables[i].key.split(":")[1]
           const price = values.split("for $")[1]
           const timestamp = availables[i].key.split(":")[4]
           const date = new Date(timestamp);
+          console.log(date)
           const year = date.getFullYear();
+          console.log(year)
           const month = ("0" + (date.getMonth() + 1)).slice(-2);
+          console.log(month)
           const day = ("0" + date.getDate()).slice(-2);
+          console.log(day)
           const formattedDate = `${year}${month}${day}`;
+          console.log(formattedDate)
           //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
           //split 0 is available
           //split1 is discord
