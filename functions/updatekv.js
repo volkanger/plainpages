@@ -4,7 +4,7 @@ export async function onRequest(request) {
     // const availablesDiscord = await env.marketplace.get("availables:discord")
     // //all slack
     // const availablesSlack = await env.marketplace.get("availables:slack")
-    for (i = 0; i < allKeys.length; i++) {
+    for (let i = 0; i < allKeys.length; i++) {
         const value = await env.marketplace.get(allKeys[i].name)
         console.log("Current Value:")
         console.log(value)
