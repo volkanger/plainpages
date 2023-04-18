@@ -41,7 +41,7 @@ export async function onRequest({ context, env, request  }) {
           const price = values.split("for $")[1]
           const timestamp = availables[i].key.split(":")[4]
           console.log(timestamp)
-          const date = new Date("1678371896959");
+          const date = new Date(parseInt(timestamp));
           console.log(date)
           const year = date.getFullYear();
           console.log(year)
