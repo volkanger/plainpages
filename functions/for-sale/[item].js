@@ -49,7 +49,7 @@ export async function onRequest({ context, env, request  }) {
           console.log(month)
           const day = ("0" + date.getDate()).slice(-2);
           console.log(day)
-          const formattedDate = `${year}${month}${day}`;
+          const formattedDate = `${month}.${day}.${year}`;
           console.log(formattedDate)
           //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
           //split 0 is available
@@ -153,7 +153,7 @@ export async function onRequest({ context, env, request  }) {
                           </figure>
                           <figure>
                               <a href="#">
-                                  <i class="fa fa-user"></i>${item.user}
+                                  <i class="fa fa-user"></i>${item.owner}
                               </a>
                           </figure>
                       </div>
