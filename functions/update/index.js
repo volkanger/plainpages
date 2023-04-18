@@ -19,13 +19,12 @@ export async function onRequest({ context, env, request  }) {
     // const availablesDiscord = await env.marketplace.get("availables:discord")
     // //all slack
     // const availablesSlack = await env.marketplace.get("availables:slack")
-    let availables = await env.marketplace.get("availables") //array
+    let availables = JSON.parse(await env.marketplace.get("availables"))
 
     for (let i = 0; i < allKeys.length; i++) {
         const value = await env.marketplace.get(allKeys[i].name)
         console.log("Current Value:")
         console.log(value)
-        availables = JSON.parse(availables)
         console.log("Availables:")
         console.log(availables)
         //push the object
