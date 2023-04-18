@@ -3,7 +3,14 @@ export async function onRequest({ context, env, request  }) {
  let availables = JSON.parse(await env.marketplace.get("availables"))
  console.log(availables)
  console.log(JSON.stringify(availables))
- return new Response("Thanks!")
+ let newest = {
+  "key": "available:T:U:Timey", 
+  "value": "satılık iphoney"
+  }
+  console.log(newest)
+
+
+ return new Response(newest)
 
     // const allKeys = (await env.marketplace.list({"prefix": "available:T151XMC12:"})).keys
     // // //all discord
