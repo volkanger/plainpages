@@ -1,5 +1,5 @@
 export async function onRequest({ context, env, request  }) {
-    const allKeys = (await env.marketplace.list({"prefix": "available:T151XMC12:167"})).keys
+    const allKeys = (await env.marketplace.list({"prefix": "available:T151XMC12:"})).keys
     // //all discord
     // const availablesDiscord = await env.marketplace.get("availables:discord")
     // //all slack
