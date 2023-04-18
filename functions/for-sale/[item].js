@@ -1455,7 +1455,7 @@ export async function onRequest({ context, env, request  }) {
 	<script src="/assets/js/icheck.min.js"></script>
 	<script src="/assets/js/jquery.validate.min.js"></script>
 	<script src="/assets/js/custom.js"></script>
-    <script type="text/javascript" src="assets/js/purify.min.js"></script>
+    <script type="text/javascript" src="/assets/js/purify.min.js"></script>
 
 </body>
 </html>
