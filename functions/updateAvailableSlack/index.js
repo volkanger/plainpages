@@ -14,7 +14,7 @@ export async function onRequest({ context, env, request  }) {
 //  return new Response(JSON.stringify(availables))
 
 
-    const allKeys = (await env.marketplace.list({"prefix": "available:T151XMC12"})).keys
+    const allKeys = (await env.marketplace.list({"prefix": "available:T"})).keys
     // //all discord
     // const availablesDiscord = await env.marketplace.get("availables:discord")
     // //all slack
@@ -47,7 +47,7 @@ export async function onRequest({ context, env, request  }) {
     
     // console.log(availables)
 
-    return new Response("Thank you for the new values. Let's see if it worked. check the logs. Hope you were tailing 'em.", {
+    return new Response("Now the KV has :slack: thanks to you. You da best. Let's see if it worked. check the logs. Hope you were tailing 'em. No worries, check the KV.", {
         headers: {
           "content-type": "text/plain;charset=UTF-8",
         },
