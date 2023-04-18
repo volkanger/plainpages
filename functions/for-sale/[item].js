@@ -31,6 +31,12 @@ export async function onRequest({ context, env, request  }) {
           console.log("matching values: " + values)
           //split the key so we know the seller team and userID
           const item_owner_user_id = availables[i].key.split(":")[3]
+          console.log(availables[i].key.split(":")[0])
+          console.log(availables[i].key.split(":")[1])
+          console.log(availables[i].key.split(":")[2])
+          console.log(availables[i].key.split(":")[3])
+          console.log(availables[i].key.split(":")[4])
+          console.log(availables[i].key.split(":")[5])
           const itemPlatform = availables[i].key.split(":")[1]
           const price = values.split("for $")[1]
           const timestamp = availables[i].key.split(":")[4]
