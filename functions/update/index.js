@@ -14,10 +14,13 @@ export async function onRequest({ context, env, request  }) {
         //push the object
         console.log("Availables type:")
         console.log(typeof availables)
+        let availablesArray = JSON.parse(availables)
+        console.log("AvailablesArray type:")
+        console.log(typeof availablesArray)
         let newPair = {"key": allKeys[i].name, "value": value}
         console.log("newPair:")
         console.log(newPair)
-        const newAvailables = availables.push()
+        const newAvailables = availablesArray.push()
         console.log("newAvailables:")
         console.log(newAvailables)
         await env.marketplace.put(availables, newAvailables)
