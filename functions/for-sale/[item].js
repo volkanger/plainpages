@@ -14,6 +14,34 @@ export async function onRequest({ context, env, request  }) {
     // const allKeys = await env.marketplace.get("available:T01C79S2HKP:U01JP332EP7:1616534585127")
     const allKeys = (await env.marketplace.list({"prefix": "available:"})).keys
 
+
+    // //all discord
+    // const availablesDiscord = await env.marketplace.get("availables:discord")
+    // //all slack
+    // const availablesSlack = await env.marketplace.get("availables:slack")
+
+    //convert allKeys to one availables
+    for (i = 0; i < allKeys.length; i++) {
+        const value = await env.marketplace.get(allKeys[i].name)
+        console.log("Current Value:")
+        console.log(value)
+        const availables = await env.marketplace.get("availables") //array
+        console.log("Availables:")
+        console.log(availables)
+        //push the object
+        console.log("Availables type:")
+        console.log(typeof availables)
+        let newPair = {"key": allKeys[i].name, "value": value}
+        console.log("newPair:")
+        console.log(newPair)
+        const newAvailables = availables.push()
+        console.log("newAvailables:")
+        console.log(newAvailables)
+        await env.marketplace.put(availables, newAvailables)
+    }
+    
+
+
     async function search(keyword) {
       var foundKeys = 0
       var i = 0
@@ -34,7 +62,7 @@ export async function onRequest({ context, env, request  }) {
           const year = date.getFullYear();
           const month = ("0" + (date.getMonth() + 1)).slice(-2);
           const day = ("0" + date.getDate()).slice(-2);
-          const formattedDate = `${year}.${month}.${day}`;
+          const formattedDate = `${year}${month}${day}`;
           //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
           //split 0 is available
           //split1 is discord
