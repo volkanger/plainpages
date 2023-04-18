@@ -13,7 +13,7 @@ export async function onRequest({ context, env, request  }) {
     //learn how to patch pages to kv
     // const allKeys = await env.marketplace.get("available:T01C79S2HKP:U01JP332EP7:1616534585127")
     const allKeys = (await env.marketplace.list({"prefix": "available:"})).keys
-
+    let availables = JSON.parse(await env.marketplace.get("availables"))
 
 
 
@@ -22,18 +22,18 @@ export async function onRequest({ context, env, request  }) {
       var foundKeys = 0
       var i = 0
       var searchResults = []
-      for (i = 0; i < allKeys.length; i++) {
+      for (i = 0; i < availables.length; i++) {
         //console.log(i)
-        const values = await env.marketplace.get(allKeys[i].name)
+        const values = availables[i].value
         //console.log("values: " + values)
         if (values && values.toLowerCase().includes(keyword.toLowerCase())) {
           foundKeys = foundKeys + 1
           console.log("matching values: " + values)
           //split the key so we know the seller team and userID
-          const item_owner_user_id = allKeys[i].name.split(":")[3]
-          const itemPlatform = allKeys[i].name.split(":")[1]
+          const item_owner_user_id = availables[i].key.split(":")[3]
+          const itemPlatform = availables[i].key.split(":")[1]
           const price = values.split("for $")[1]
-          const timestamp = allKeys[i].name.split(":")[4]
+          const timestamp = availables[i].key.split(":")[4]
           const date = new Date(timestamp);
           const year = date.getFullYear();
           const month = ("0" + (date.getMonth() + 1)).slice(-2);
@@ -1455,7 +1455,7 @@ export async function onRequest({ context, env, request  }) {
 	<script src="/assets/js/icheck.min.js"></script>
 	<script src="/assets/js/jquery.validate.min.js"></script>
 	<script src="/assets/js/custom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.2/purify.min.js"></script>
+    <script type="text/javascript" src="assets/js/purify.min.js"></script>
 
 </body>
 </html>
