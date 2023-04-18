@@ -30,10 +30,10 @@ export async function onRequest({ context, env, request  }) {
           foundKeys = foundKeys + 1
           console.log("matching values: " + values)
           //split the key so we know the seller team and userID
-          const item_owner_user_id = availables[i].key.split(":")[4]
-          const itemPlatform = availables[i].key.split(":")[2]
+          const item_owner_user_id = availables[i].key.split(":")[3]
+          const itemPlatform = availables[i].key.split(":")[1]
           const price = values.split("for $")[1]
-          const timestamp = availables[i].key.split(":")[5]
+          const timestamp = availables[i].key.split(":")[4]
           const date = new Date(timestamp);
           const year = date.getFullYear();
           const month = ("0" + (date.getMonth() + 1)).slice(-2);
