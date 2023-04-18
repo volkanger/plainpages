@@ -31,16 +31,19 @@ export async function onRequest({ context, env, request  }) {
           console.log("matching values: " + values)
           //split the key so we know the seller team and userID
           const item_owner_user_id = availables[i].key.split(":")[3]
-          console.log(availables[i].key.split(":")[0]) //available
-          console.log(availables[i].key.split(":")[1]) //discord
-          console.log(availables[i].key.split(":")[2]) //001992934882
-          console.log(availables[i].key.split(":")[3]) //813849193249
-          console.log(availables[i].key.split(":")[4]) //1678371896959
-          console.log(availables[i].key.split(":")[5]) //null
+          console.log(availables[i].key.split(":")[0]) //available 
+          console.log(availables[i].key.split(":")[1]) //discord | slack
+          console.log(availables[i].key.split(":")[2]) //001992934882 |T151XMC12
+          console.log(availables[i].key.split(":")[3]) //813849193249 |U1VALTVUY
+          console.log(availables[i].key.split(":")[4]) //1678371896959 | 1681857472.834529 (thread id)
+          console.log(availables[i].key.split(":")[5]) //null 1681857472656
           const itemPlatform = availables[i].key.split(":")[1]
           const price = values.split("for $")[1]
           const timestamp = availables[i].key.split(":")[4]
-          console.log(timestamp)
+          if (itemPlatform == "slack") {
+            timestamp = availables[i].key.split(":")[5]
+          }
+          console.log(timestamp) //1681857472.834529
           const date = new Date(parseInt(timestamp));
           console.log(date)
           const year = date.getFullYear();
