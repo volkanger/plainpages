@@ -8,9 +8,11 @@ export async function onRequest({ context, env, request  }) {
   "value": "satılık iphoney"
   }
   console.log(newest)
+  availables.push(newest)
+  console.log(availables)
 
 
- return new Response(newest)
+ return new Response(JSON.stringify(newest))
 
     // const allKeys = (await env.marketplace.list({"prefix": "available:T151XMC12:"})).keys
     // // //all discord
