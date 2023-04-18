@@ -41,7 +41,7 @@ export async function onRequest({ context, env, request  }) {
         console.log(availables)
         if (i == allKeys.length-1) { //last one. Not sure if I can get the value out of here.
           console.log(availables)
-          await env.marketplace.put("availables", availables)
+          await env.marketplace.put("availables", JSON.stringify(availables))
         }
     }
     
