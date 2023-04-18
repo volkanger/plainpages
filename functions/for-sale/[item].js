@@ -40,6 +40,7 @@ export async function onRequest({ context, env, request  }) {
           const itemPlatform = availables[i].key.split(":")[1]
           const price = values.split("for $")[1]
           const timestamp = availables[i].key.split(":")[4]
+          console.log(timestamp)
           const date = new Date(timestamp);
           console.log(date)
           const year = date.getFullYear();
