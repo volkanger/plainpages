@@ -1,8 +1,6 @@
 export async function onRequest({ context, env, request  }) {
   try {
-    console.log("I'm alive")
-    console.log("There's a request.")
-    console.log("I want to get to the bottom of this. ")
+    console.log("Hello from [item].js")
 
     
 		let input = await request.formData();
@@ -12,7 +10,7 @@ export async function onRequest({ context, env, request  }) {
        
     //learn how to patch pages to kv
     // const allKeys = await env.marketplace.get("available:T01C79S2HKP:U01JP332EP7:1616534585127")
-    const allKeys = (await env.marketplace.list({"prefix": "available:"})).keys
+    //const allKeys = (await env.marketplace.list({"prefix": "available:"})).keys //resorting to availableS now for anything search.
     let availables = JSON.parse(await env.marketplace.get("availables"))
 
 
