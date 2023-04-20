@@ -86,49 +86,7 @@ export async function onRequest({ context, env, request  }) {
     console.log(searcheResults)
     console.log(JSON.stringify(searcheResults))
 
-    let cards = [`<div class="item">
-    <div class="ribbon-diagonal">
-        <div class="ribbon-diagonal__inner">
-            <span>Sold</span>
-        </div>
-    </div>
-    <div class="ribbon-featured">Featured</div>
-    <!--end ribbon-->
-    <div class="wrapper">
-        <div class="image">
-            <h3>
-                <a href="#" class="tag category">Home & Decor</a>
-                <a href="single-listing-1.html" class="title">Furniture for sale</a>
-                <span class="tag">Offer</span>
-            </h3>
-            <a href="single-listing-1.html" class="image-wrapper background-image">
-                <img src="assets/img/image-01.jpg" alt="">
-            </a>
-        </div>
-        <!--end image-->
-        <h4 class="location">
-            <a href="#">Manhattan, NY</a>
-        </h4>
-        <div class="price">$80</div>
-        <div class="meta">
-            <figure>
-                <i class="fa fa-calendar-o"></i>02.05.2017
-            </figure>
-            <figure>
-                <a href="#">
-                    <i class="fa fa-user"></i>Jane Doe
-                </a>
-            </figure>
-        </div>
-        <!--end meta-->
-        <div class="description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis lobortis</p>
-        </div>
-        <!--end description-->
-        <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
-    </div>
-</div>
-<!--end item-->`]
+    let cards = [``]
 
     searcheResults.forEach((item) => {
         console.log(item.title)
