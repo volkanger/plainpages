@@ -12,6 +12,7 @@ export async function onRequest({ context, env, request  }) {
     // const allKeys = await env.marketplace.get("available:T01C79S2HKP:U01JP332EP7:1616534585127")
     const allKeys = (await env.marketplace.list({"prefix": "available:"})).keys
     let availables = JSON.parse(await env.marketplace.get("availables"))
+    console.log(availables)
 
 
 
