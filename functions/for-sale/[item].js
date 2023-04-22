@@ -37,7 +37,7 @@ export async function onRequest({ context, env, request  }) {
           console.log(availables[i].key.split(":")[5]) //null 1681857472656
           const itemPlatform = availables[i].key.split(":")[1]
           const price = values.split("for $")[1]
-          const timestamp = availables[i].key.split(":")[4]
+          let timestamp = availables[i].key.split(":")[4]
           if (itemPlatform == "slack") {
             timestamp = availables[i].key.split(":")[5]
           }
