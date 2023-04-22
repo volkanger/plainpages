@@ -1,8 +1,6 @@
 export async function onRequest({ context, env, request  }) {
   try {
-    console.log("I'm alive")
-    console.log("There's a request.")
-    console.log("I want to get to the bottom of this. ")
+    console.log("I'm reporting live from the [item].js page")
 
     
 		let input = await request.formData();
