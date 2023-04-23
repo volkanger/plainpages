@@ -22,7 +22,7 @@ export async function onRequest({ context, env, request  }) {
       var foundKeys = 0
       var searchResults = []
       let itemsFound = {}
-      let availables = JSON.parse(await marketplace.get("availables"))
+      let availables = JSON.parse(await env.marketplace.get("availables"))
       let items = Object.entries(availables);
       items.forEach( ([key, value]) => {
         console.log(key)
