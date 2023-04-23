@@ -46,10 +46,11 @@ export async function onRequest({ context, env, request  }) {
     console.log(JSON.stringify(searcheResults))
 
     let cards = [``]
+    
 
-    searcheResults.forEach((item) => {
-        console.log(item.title)
-        console.log(item.owner)
+    Object.values(itemsFound).foreatch (([key,value]) => {
+        console.log(value.title)
+        console.log(value.owner)
         cards.push(`<div class="item">
                   <div class="wrapper">
                       <div class="image">
