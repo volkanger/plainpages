@@ -44,7 +44,7 @@ export async function onRequest({ context, env, request  }) {
 
     let cards = [``]
     
-    console.log(itemsFound)
+    //console.log(itemsFound)
     console.log(searcheResults)
 
     SearcheResults.foreach (([key,value]) => {
