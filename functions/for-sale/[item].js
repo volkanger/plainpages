@@ -19,18 +19,15 @@ export async function onRequest({ context, env, request  }) {
 
     async function search(keyword) {
       console.log("search initiated for this keyword: " + keyword)
-      var foundKeys = 0
-      var searchResults = []
       let itemsFound = {}
       let availables = JSON.parse(await env.marketplace.get("availables"))
       let items = Object.entries(availables);
-      items.forEach( ([key, value]) => {
-        console.log(key)
-        console.log(value)
-        if (value.title.includes(keyword)) {
-          console.log("found one: " + key)
-					foundKeys++
-					itemsFound[key] = value
+      items.forEach( ([key, item]) => {
+        // console.log(key)
+        // console.log(value)
+        if (item.title.includes(keyword)) {
+          console.log("found one: " + item.title)
+					itemsFound[key] = item
         }
       })
       console.log(itemsFound)
@@ -47,8 +44,10 @@ export async function onRequest({ context, env, request  }) {
 
     let cards = [``]
     
+    console.log(itemsFound)
+    console.log(searcheResults)
 
-    Object.values(itemsFound).foreatch (([key,value]) => {
+    SearcheResults.foreach (([key,value]) => {
         console.log(value.title)
         console.log(value.owner)
         cards.push(`<div class="item">
