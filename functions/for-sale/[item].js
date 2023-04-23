@@ -30,7 +30,7 @@ export async function onRequest({ context, env, request  }) {
 					itemsFound[key] = item
         }
       })
-      console.log(itemsFound)
+      // console.log(itemsFound)
       
       return itemsFound
     }
@@ -47,7 +47,7 @@ export async function onRequest({ context, env, request  }) {
     //console.log(itemsFound)
     console.log(searcheResults)
 
-    SearcheResults.foreach (([key,value]) => {
+    searcheResults.foreach (([key,value]) => {
         console.log(value.title)
         console.log(value.owner)
         cards.push(`<div class="item">
