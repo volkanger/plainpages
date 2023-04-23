@@ -19,64 +19,72 @@ export async function onRequest({ context, env, request  }) {
 
     async function search(keyword) {
       console.log("search initiated for this keyword: " + keyword)
-      console.log("availables is this long: " + availables.length)
+      console.log("availables is this long: " + Object.keys(availables).length)
       var foundKeys = 0
       var i = 0
       var searchResults = []
-      for (i = 0; i < availables.length; i++) {
-        //console.log(i)
-        const values = availables[i].value
-        //console.log("values: " + values)
-        if (values && values.toLowerCase().includes(keyword.toLowerCase())) {
-          foundKeys = foundKeys + 1
-          console.log("matching values: " + values)
-          //split the key so we know the seller team and userID
-          const item_owner_user_id = availables[i].key.split(":")[3]
-          console.log(availables[i].key.split(":")[0]) //available 
-          console.log(availables[i].key.split(":")[1]) //discord | slack
-          console.log(availables[i].key.split(":")[2]) //001992934882 |T151XMC12
-          console.log(availables[i].key.split(":")[3]) //813849193249 |U1VALTVUY
-          console.log(availables[i].key.split(":")[4]) //1678371896959 | 1681857472.834529 (thread id)
-          console.log(availables[i].key.split(":")[5]) //null 1681857472656
-          const itemPlatform = availables[i].key.split(":")[1]
-          const price = values.split("for $")[1]
-          let timestamp = availables[i].key.split(":")[4]
-          if (itemPlatform == "slack") {
-            timestamp = availables[i].key.split(":")[5]
-          }
-          console.log(timestamp) //1681857472.834529
-          const date = new Date(parseInt(timestamp));
-          console.log(date)
-          const year = date.getFullYear();
-          console.log(year)
-          const month = ("0" + (date.getMonth() + 1)).slice(-2);
-          console.log(month)
-          const day = ("0" + date.getDate()).slice(-2);
-          console.log(day)
-          const formattedDate = `${month}.${day}.${year}`;
-          console.log(formattedDate)
-          //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
-          //split 0 is available
-          //split1 is discord
-          //split 2 is team, split 3 is user
-          //use sections[1] + sections[2] down instead of team_id and user_id below
-          let object = {
-            "title" : values,
-            "owner" : item_owner_user_id,
-            "price" : price,
-            "platform" : itemPlatform,
-            "time" : formattedDate
-          }
-          searchResults.push(object)
-          // searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
-          // console.log(searchResults)
-        } 
+      let availables = JSON.parse(await marketplace.get("availables"))
+      let items = Object.entries(availables);
+      items.forEach( ([key, value]) => {
+        console.log(key)
+        console.log(value)
+        break
       }
-      console.log(searchResults)
-      if (searchResults.length == 0) {
-        console.log("nothing found")
-        return new Response("Nothing found")
-      }
+      console.log("that's it")
+      // for (i = 0; i < Object.keys(availables).length; i++) {
+      //   //console.log(i)
+      //   const values = availables[i].value
+      //   //console.log("values: " + values)
+      //   if (values && values.toLowerCase().includes(keyword.toLowerCase())) {
+      //     foundKeys = foundKeys + 1
+      //     console.log("matching values: " + values)
+      //     //split the key so we know the seller team and userID
+      //     const item_owner_user_id = availables[i].key.split(":")[3]
+      //     console.log(availables[i].key.split(":")[0]) //available 
+      //     console.log(availables[i].key.split(":")[1]) //discord | slack
+      //     console.log(availables[i].key.split(":")[2]) //001992934882 |T151XMC12
+      //     console.log(availables[i].key.split(":")[3]) //813849193249 |U1VALTVUY
+      //     console.log(availables[i].key.split(":")[4]) //1678371896959 | 1681857472.834529 (thread id)
+      //     console.log(availables[i].key.split(":")[5]) //null 1681857472656
+      //     const itemPlatform = availables[i].key.split(":")[1]
+      //     const price = values.split("for $")[1]
+      //     let timestamp = availables[i].key.split(":")[4]
+      //     if (itemPlatform == "slack") {
+      //       timestamp = availables[i].key.split(":")[5]
+      //     }
+      //     console.log(timestamp) //1681857472.834529
+      //     const date = new Date(parseInt(timestamp));
+      //     console.log(date)
+      //     const year = date.getFullYear();
+      //     console.log(year)
+      //     const month = ("0" + (date.getMonth() + 1)).slice(-2);
+      //     console.log(month)
+      //     const day = ("0" + date.getDate()).slice(-2);
+      //     console.log(day)
+      //     const formattedDate = `${month}.${day}.${year}`;
+      //     console.log(formattedDate)
+      //     //allKeys[i] is something like: "available:discord:T151XMC12:U1VALTVUY:1610241853179"
+      //     //split 0 is available
+      //     //split1 is discord
+      //     //split 2 is team, split 3 is user
+      //     //use sections[1] + sections[2] down instead of team_id and user_id below
+      //     let object = {
+      //       "title" : values,
+      //       "owner" : item_owner_user_id,
+      //       "price" : price,
+      //       "platform" : itemPlatform,
+      //       "time" : formattedDate
+      //     }
+      //     searchResults.push(object)
+      //     // searchResults = searchResults +`${searchResults} \n ${values} from <@${item_owner_user_id}>`
+      //     // console.log(searchResults)
+      //   } 
+      // }
+      // console.log(searchResults)
+      // if (searchResults.length == 0) {
+      //   console.log("nothing found")
+      //   return new Response("Nothing found")
+      // }
       return searchResults
     }
 
