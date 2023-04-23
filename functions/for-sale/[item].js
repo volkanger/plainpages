@@ -19,7 +19,6 @@ export async function onRequest({ context, env, request  }) {
 
     async function search(keyword) {
       console.log("search initiated for this keyword: " + keyword)
-      console.log("availables is this long: " + Object.keys(availables).length)
       var foundKeys = 0
       var searchResults = []
       let itemsFound = {}
