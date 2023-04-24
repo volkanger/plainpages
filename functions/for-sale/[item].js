@@ -78,6 +78,7 @@ export async function onRequest({ context, env, request  }) {
       console.log("for each at 74")
       console.log(item)
       const date = new Date(item.timestamp)
+      console.log(date)
       
         cards.push(`<div class="item">
                   <div class="wrapper">
@@ -98,7 +99,7 @@ export async function onRequest({ context, env, request  }) {
                       <div class="price">${item.price}</div>
                       <div class="meta">
                           <figure>
-                              <i class="fa fa-calendar-o"></i>${date.getDate() + '/' +  date.getMonth() + '/' + date.getFullYear()}
+                              <i class="fa fa-calendar-o"></i>${date.toLocaleString()}
                           </figure>
                           <figure>
                               <a href="#">
