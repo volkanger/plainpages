@@ -51,13 +51,14 @@ export async function onRequest({ context, env, request  }) {
       return itemsFound
     }
 
-    console.log(searcheResults)
-    console.log("regular above, string below")
-    console.log(JSON.stringify(searcheResults))
+    
 
     console.log("---i guess ill see this before the rest")
     console.time("search keyword function starts with the keyword: " + keyword)
     let searcheResults = await search(keyword)
+    console.log(searcheResults)
+    console.log("regular above, string below")
+    console.log(JSON.stringify(searcheResults))
     console.timeEnd("search ended")
     // console.log(searcheResults)
     //console.log(JSON.stringify(searcheResults))
