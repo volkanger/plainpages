@@ -78,7 +78,7 @@ export async function onRequest({ context, env, request  }) {
       console.log("for each at 74")
       console.log(item)
       console.log(item.timestamp)
-      const date = new Date(item.timestamp); // convert to milliseconds
+      const date = new Date(1610241853179); // convert to milliseconds
       console.log(date)
       const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
       const humanReadableDate = date.toLocaleDateString('en-US', options).replace(/\//g, '.'); // format as "20.12.2019"
