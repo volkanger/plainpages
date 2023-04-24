@@ -40,17 +40,16 @@ export async function onRequest({ context, env, request  }) {
     let searcheResults = await search(keyword)
     console.timeEnd("search ended")
     console.log(searcheResults)
-    console.log(JSON.stringify(searcheResults))
+    //console.log(JSON.stringify(searcheResults))
 
     let cards = [``]
-    
-    //console.log(itemsFound)
-    console.log(searcheResults)
 
     //git add . && git commit -m "publish por favor" && git push
     //git add . ; git commit -m "publish por favor" ; git push
+    //wrangler pages deployment tail
 
     Object.values(JSON.parse(searcheResults)).forEach( ([key,value]) => { //this is an object, run it like an object
+        console.log("for each at 52")
         console.log(value.title)
         console.log(value.owner)
         cards.push(`<div class="item">
