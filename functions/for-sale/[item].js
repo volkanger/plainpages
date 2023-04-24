@@ -56,9 +56,7 @@ export async function onRequest({ context, env, request  }) {
     console.log("---i guess ill see this before the rest")
     console.time("search keyword function starts with the keyword: " + keyword)
     let searcheResults = JSON.stringify(await search(keyword))
-    console.log(searcheResults)
-    console.log("regular above, string below")
-    console.log(JSON.stringify(searcheResults))
+
     console.timeEnd("search ended")
     // console.log(searcheResults)
     //console.log(JSON.stringify(searcheResults))
@@ -68,23 +66,20 @@ export async function onRequest({ context, env, request  }) {
     //git add . && git commit -m "publish por favor" && git push
     //git add . ; git commit -m "publish por favor" ; git push
     //wrangler pages deployment tail
-    console.log("searcheResults")
-    console.log("searcheResults")
-    console.log("searcheResults")
-    console.log("searcheResults")
-    console.log(searcheResults)
-    console.log("searcheResults")
+
     // let foundItems = Object.values(searcheResults)
     // console.log(foundItems)
 
     Object.values(searcheResults).forEach( ([key,value]) => { //this is an object, run it like an object
       console.log("searcheResults in ")
-    console.log("searcheResults in ")
-    console.log("searcheResults in")
+      console.log("searcheResults in ")
+      console.log("searcheResults in")
       console.log(searcheResults)
-        console.log("for each at 74")
-        console.log(value.title)
-        console.log(value.owner)
+      console.log("for each at 74")
+      console.log(key)
+      console.log(value)
+      console.log(value.title)
+      console.log(value.owner)
         cards.push(`<div class="item">
                   <div class="wrapper">
                       <div class="image">
