@@ -77,7 +77,7 @@ export async function onRequest({ context, env, request  }) {
     // let foundItems = Object.values(searcheResults)
     // console.log(foundItems)
 
-    Object.values(JSON.parse(searcheResults)).forEach( ([key,value]) => { //this is an object, run it like an object
+    Object.values(searcheResults).forEach( ([key,value]) => { //this is an object, run it like an object
       console.log("searcheResults in ")
     console.log("searcheResults in ")
     console.log("searcheResults in")
