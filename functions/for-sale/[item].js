@@ -22,10 +22,12 @@ export async function onRequest({ context, env, request  }) {
       let itemsFound = {}
       let availables = JSON.parse(await env.marketplace.get("availables"))
       let items = Object.entries(availables);
+      console.log(items)
       items.forEach( ([key, item]) => {
         // console.log(key)
         // console.log(value)
         if (item.title.includes(keyword)) {
+          console.log(item)
           console.log("found one: " + item.title)
 					itemsFound[key] = item
         }
@@ -39,7 +41,7 @@ export async function onRequest({ context, env, request  }) {
     console.time("search keyword function starts with the keyword: " + keyword)
     let searcheResults = await search(keyword)
     console.timeEnd("search ended")
-    console.log(searcheResults)
+    // console.log(searcheResults)
     //console.log(JSON.stringify(searcheResults))
 
     let cards = [``]
