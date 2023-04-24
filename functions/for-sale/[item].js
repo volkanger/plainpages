@@ -29,7 +29,7 @@ export async function onRequest({ context, env, request  }) {
         if (item.title.includes(keyword)) {
           console.log(item)
           console.log("found one: " + item.title)
-					itemsFound[key] = JSON.stringify(item)
+					itemsFound[JSON.stringify(key)] = JSON.stringify(item)
           console.log("item")
           console.log(item)
           console.log("item sitringifed")
