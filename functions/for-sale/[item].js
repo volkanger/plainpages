@@ -49,8 +49,14 @@ export async function onRequest({ context, env, request  }) {
     //git add . && git commit -m "publish por favor" && git push
     //git add . ; git commit -m "publish por favor" ; git push
     //wrangler pages deployment tail
-    let foundItems = Object.values(searcheResults)
-    console.log(foundItems)
+    console.log("searcheResults")
+    console.log("searcheResults")
+    console.log("searcheResults")
+    console.log("searcheResults")
+    console.log(searcheResults)
+    console.log("searcheResults")
+    // let foundItems = Object.values(searcheResults)
+    // console.log(foundItems)
 
     Object.values(JSON.parse(searcheResults)).forEach( ([key,value]) => { //this is an object, run it like an object
         console.log("for each at 52")
