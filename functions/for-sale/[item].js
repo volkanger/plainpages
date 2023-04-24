@@ -77,8 +77,9 @@ export async function onRequest({ context, env, request  }) {
       console.log(searcheResults)
       console.log("for each at 74")
       console.log(item)
-      
+      console.log(item.timestamp)
       const date = new Date(item.timestamp); // convert to milliseconds
+      console.log(date)
       const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
       const humanReadableDate = date.toLocaleDateString('en-US', options).replace(/\//g, '.'); // format as "20.12.2019"
       console.log(humanReadableDate);
@@ -116,7 +117,7 @@ export async function onRequest({ context, env, request  }) {
                           <p>Nam eget ullamcorper massa. Morbi fringilla lectus nec lorem tristique gravida</p>
                       </div>
                       <!--end description-->
-                      <a href="single-listing-1.html" class="detail text-caps underline">Details></a>
+                      <a href="single-listing-1.html" class="detail text-caps underline">Details</a>
                   </div>
               </div>
               <!--end item-->`)
