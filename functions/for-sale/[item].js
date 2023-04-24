@@ -116,7 +116,7 @@ export async function onRequest({ context, env, request  }) {
                           <p>Nam eget ullamcorper massa. Morbi fringilla lectus nec lorem tristique gravida</p>
                       </div>
                       <!--end description-->
-                      <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                      <a href="single-listing-1.html" class="detail text-caps underline">Details></a>
                   </div>
               </div>
               <!--end item-->`)
