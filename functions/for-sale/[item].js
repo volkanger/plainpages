@@ -77,7 +77,11 @@ export async function onRequest({ context, env, request  }) {
       console.log(searcheResults)
       console.log("for each at 74")
       console.log(item)
-      const date = new Date(item.timestamp)
+      
+      const date = new Date(item.timestamp * 1000); // convert to milliseconds
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      const humanReadableDate = date.toLocaleDateString('en-US', options).replace(/\//g, '.'); // format as "20.12.2019"
+      console.log(humanReadableDate);
       console.log(date)
       
         cards.push(`<div class="item">
@@ -99,7 +103,7 @@ export async function onRequest({ context, env, request  }) {
                       <div class="price">${item.price}</div>
                       <div class="meta">
                           <figure>
-                              <i class="fa fa-calendar-o"></i>${date.getFullYear()}
+                              <i class="fa fa-calendar-o"></i>${humanReadableDate}
                           </figure>
                           <figure>
                               <a href="#">
