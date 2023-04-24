@@ -42,7 +42,7 @@ export async function onRequest({ context, env, request  }) {
       })
       // console.log(itemsFound)
       
-      return JSON.stringify(itemsFound)
+      return itemsFound
     }
 
     console.log("---i guess ill see this before the rest")
