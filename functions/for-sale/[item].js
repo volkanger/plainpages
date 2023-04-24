@@ -30,6 +30,10 @@ export async function onRequest({ context, env, request  }) {
           console.log(item)
           console.log("found one: " + item.title)
 					itemsFound[key] = JSON.stringify(item)
+          console.log("itemsFound[key] = JSON.stringify(item)")
+          console.log(itemsFound[key] = JSON.stringify(item))
+          console.log("itemsFound[JSON.stringify(key)] = JSON.stringify(item)")
+          console.log(itemsFound[JSON.stringify(key)] = JSON.stringify(item))
         }
       })
       // console.log(itemsFound)
