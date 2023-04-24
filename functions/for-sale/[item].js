@@ -67,7 +67,11 @@ export async function onRequest({ context, env, request  }) {
     // console.log(foundItems)
 
     Object.values(JSON.parse(searcheResults)).forEach( ([key,value]) => { //this is an object, run it like an object
-        console.log("for each at 52")
+      console.log("searcheResults in ")
+    console.log("searcheResults in ")
+    console.log("searcheResults in")
+      console.log(searcheResults)
+        console.log("for each at 74")
         console.log(value.title)
         console.log(value.owner)
         cards.push(`<div class="item">
