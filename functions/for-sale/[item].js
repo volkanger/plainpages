@@ -96,11 +96,11 @@ export async function onRequest({ context, env, request  }) {
                       <div class="price">${item.price}</div>
                       <div class="meta">
                           <figure>
-                              <i class="fa fa-calendar-o"></i>${item.time}
+                              <i class="fa fa-calendar-o"></i>${(new Date(item.timestamp)).toDateString()}
                           </figure>
                           <figure>
                               <a href="#">
-                                  <i class="fa fa-user"></i>${item.owner}
+                                  <i class="fa fa-user"></i>${item.userID}
                               </a>
                           </figure>
                       </div>
