@@ -48,7 +48,9 @@ export async function onRequest({ context, env, request  }) {
     console.log(searcheResults)
 
     //git add . && git commit -m "publish por favor" && git push
-    Object.values(searcheResults).forEach( ([key,value]) => { //this is an object, run it like an object
+    //git add . ; git commit -m "publish por favor" ; git push
+
+    Object.values(JSON.parse(searcheResults)).forEach( ([key,value]) => { //this is an object, run it like an object
         console.log(value.title)
         console.log(value.owner)
         cards.push(`<div class="item">
