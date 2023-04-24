@@ -38,12 +38,11 @@ export async function onRequest({ context, env, request  }) {
           console.log(item)
           console.log("key sitringifed")
           console.log(JSON.stringify(key))
-          
         }
       })
       // console.log(itemsFound)
       
-      return itemsFound
+      return JSON.stringify(itemsFound)
     }
 
     console.log("---i guess ill see this before the rest")
