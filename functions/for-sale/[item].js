@@ -20,6 +20,7 @@ export async function onRequest({ context, env, request  }) {
     async function search(keyword) {
       console.log("search initiated for this keyword: " + keyword)
       let itemsFound = {}
+      let itemsFoundStringified = {}
       let availables = JSON.parse(await env.marketplace.get("availables"))
       let items = Object.entries(availables);
       console.log(items)
@@ -29,7 +30,8 @@ export async function onRequest({ context, env, request  }) {
         if (item.title.includes(keyword)) {
           console.log(item)
           console.log("found one: " + item.title)
-					itemsFound[JSON.stringify(key)] = JSON.stringify(item)
+					itemsFound[key] = item
+          itemsFoundStringified[JSON.stringify(key)] = JSON.stringify(item)
           console.log("item")
           console.log(item)
           console.log("item sitringifed")
@@ -40,7 +42,11 @@ export async function onRequest({ context, env, request  }) {
           console.log(JSON.stringify(key))
         }
       })
-      // console.log(itemsFound)
+      console.log("itemsFound:")
+      console.log(itemsFound)
+      console.log("itemsFoundStringified:")
+      
+      console.log(itemsFoundStringified)
       
       return itemsFound
     }
