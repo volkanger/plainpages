@@ -55,7 +55,7 @@ export async function onRequest({ context, env, request  }) {
 
     console.log("---i guess ill see this before the rest")
     console.time("search keyword function starts with the keyword: " + keyword)
-    let searcheResults = await search(keyword)
+    let searcheResults = JSON.stringify(await search(keyword))
     console.log(searcheResults)
     console.log("regular above, string below")
     console.log(JSON.stringify(searcheResults))
