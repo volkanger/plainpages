@@ -99,7 +99,7 @@ export async function onRequest({ context, env, request  }) {
                       <div class="price">${item.price}</div>
                       <div class="meta">
                           <figure>
-                              <i class="fa fa-calendar-o"></i>${date.toLocaleString()}
+                              <i class="fa fa-calendar-o"></i>${date.getFullYear()}
                           </figure>
                           <figure>
                               <a href="#">
