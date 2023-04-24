@@ -70,16 +70,13 @@ export async function onRequest({ context, env, request  }) {
     // let foundItems = Object.values(searcheResults)
     // console.log(foundItems)
 
-    Object.values(searcheResults).forEach( ([key,value]) => { //this is an object, run it like an object
+    Object.values(searcheResults).forEach( (item) => { //this is an object, run it like an object
       console.log("searcheResults in ")
       console.log("searcheResults in ")
       console.log("searcheResults in")
       console.log(searcheResults)
       console.log("for each at 74")
-      console.log(key)
-      console.log(value)
-      console.log(value.title)
-      console.log(value.owner)
+      console.log(item)
         cards.push(`<div class="item">
                   <div class="wrapper">
                       <div class="image">
