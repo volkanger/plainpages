@@ -20,37 +20,71 @@ export async function onRequest({ context, env, request  }) {
     async function search(keyword) {
       console.log("search initiated for this keyword: " + keyword)
       let itemsFound = {}
+      let itemsFoundStringified = {}
       let availables = JSON.parse(await env.marketplace.get("availables"))
       let items = Object.entries(availables);
+      console.log(items)
       items.forEach( ([key, item]) => {
         // console.log(key)
         // console.log(value)
         if (item.title.includes(keyword)) {
+          console.log(item)
           console.log("found one: " + item.title)
 					itemsFound[key] = item
+          itemsFoundStringified[JSON.stringify(key)] = JSON.stringify(item)
+          console.log("item")
+          console.log(item)
+          console.log("item sitringifed")
+          console.log(JSON.stringify(item))
+          console.log("key")
+          console.log(item)
+          console.log("key sitringifed")
+          console.log(JSON.stringify(key))
         }
       })
-      // console.log(itemsFound)
+      console.log("itemsFound:")
+      console.log(itemsFound)
+      console.log("itemsFoundStringified:")
+      console.log(itemsFoundStringified)
       
+
       return itemsFound
     }
 
+    
+
     console.log("---i guess ill see this before the rest")
     console.time("search keyword function starts with the keyword: " + keyword)
-    let searcheResults = await search(keyword)
+    let searcheResults = JSON.stringify(await search(keyword))
+
     console.timeEnd("search ended")
-    console.log(searcheResults)
-    console.log(JSON.stringify(searcheResults))
+    // console.log(searcheResults)
+    //console.log(JSON.stringify(searcheResults))
 
     let cards = [``]
-    
-    //console.log(itemsFound)
-    console.log(searcheResults)
 
     //git add . && git commit -m "publish por favor" && git push
-    searcheResults.foreach (([key,value]) => { //this is an object, run it like an object
-        console.log(value.title)
-        console.log(value.owner)
+    //git add . ; git commit -m "publish por favor" ; git push
+    //wrangler pages deployment tail
+
+    // let foundItems = Object.values(searcheResults)
+    // console.log(foundItems)
+
+    Object.values(JSON.parse(searcheResults)).forEach( (item) => { //this is an object, run it like an object
+      console.log("searcheResults in ")
+      console.log("searcheResults in ")
+      console.log("searcheResults in")
+      console.log(searcheResults)
+      console.log("for each at 74")
+      console.log(item)
+      console.log(item.timestamp)
+      const date = new Date(parseInt(item.timestamp)); // convert to milliseconds
+      console.log(date)
+      const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+      const humanReadableDate = date.toLocaleDateString('en-US', options).replace(/\//g, '.'); // format as "20.12.2019"
+      console.log(humanReadableDate);
+      console.log(date)
+      
         cards.push(`<div class="item">
                   <div class="wrapper">
                       <div class="image">
@@ -70,11 +104,11 @@ export async function onRequest({ context, env, request  }) {
                       <div class="price">${item.price}</div>
                       <div class="meta">
                           <figure>
-                              <i class="fa fa-calendar-o"></i>${item.time}
+                              <i class="fa fa-calendar-o"></i>${humanReadableDate}
                           </figure>
                           <figure>
                               <a href="#">
-                                  <i class="fa fa-user"></i>${item.owner}
+                                  <i class="fa fa-user"></i>${item.userID}
                               </a>
                           </figure>
                       </div>
@@ -83,7 +117,7 @@ export async function onRequest({ context, env, request  }) {
                           <p>Nam eget ullamcorper massa. Morbi fringilla lectus nec lorem tristique gravida</p>
                       </div>
                       <!--end description-->
-                      <a href="single-listing-1.html" class="detail text-caps underline">Detail</a>
+                      <a href="single-listing-1.html" class="detail text-caps underline">Details</a>
                   </div>
               </div>
               <!--end item-->`)
